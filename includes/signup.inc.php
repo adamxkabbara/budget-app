@@ -31,7 +31,7 @@
       header("Location: ../signup.php?error=invaliduid&mail=$email");
       exit();
     }
-    else if (preg_match('/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[a-zA-Z0-9]{8,}$/', $password)) {
+    else if (!preg_match('/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[a-zA-Z0-9]{8,}$/', $password)) {
 
       header("Location: ../signup.php?error=passwordmalformed&uid=$username&mail=$email");
       exit();
