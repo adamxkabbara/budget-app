@@ -9,7 +9,7 @@ ini_set('display_errors', 1);
     private $conn;
     private $user_tbl;
 
-    public function __construct($db, $username, $email, $password) {
+    public function __construct($db, $username=null, $email=null, $password=null) {
 
       $this->username = $username;
       $this->email = $email;
