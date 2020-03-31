@@ -2,8 +2,12 @@
 
   if (isset($_POST["signup-submit"])) {
 
+    // include files
+    include_once('./dbh.inc.php');
+    include_once('../models/User.model.php');
+
     // Connect to db
-    require 'dbh.inc.php';
+    //require 'dbh.inc.php';
 
     $username = $_POST["uid"]; 
     $email = $_POST["email"];
@@ -44,51 +48,35 @@
     else {
       // Check if user already exists
 
-      $sql = 'SELECT uidUsers FROM users WHERE emailUsers=?;';
-      $stmt = mysqli_stmt_init($conn);
-      if (!mysqli_stmt_prepare($stmt, $sql)) {
+      $db = new Database();
 
-        header("Location: ../signup.php?error=invalidsql");
-        exit();
-      }
-      else {
+      $connection = $db->connect();
 
-        mysqli_stmt_bind_param($stmt, 's', $email);
-        mysqli_stmt_execute($stmt);
-        mysqli_stmt_store_result($stmt);
-        $resultCheck = mysqli_stmt_num_rows($stmt);
-        if ($resultCheck > 0) {
+      $user_obj = new User($connection, $username, $email, $password);
+
+      if ($user_obj->isDuplicate()) {
           //User taken
 
           header("Location: ../signup.php?error=userTaken&mail=$email");
           exit();
+      }
+      else {
+        // Create User
+
+        if (!$user_obj->create_user()) {
+          header("Location: ../signup.php?error=invalidsql");
+          exit();
         }
         else {
-          // Add User
-
-          $sql = 'INSERT INTO users (uidUsers, emailUsers, pwdUsers) VALUES (?, ?, ?);';
-          $stmt = mysqli_stmt_init($conn);
-          if (!mysqli_stmt_prepare($stmt, $sql)) {
-
-            header("Location: ../signup.php?error=invalidsql");
-            exit();
-          }
-          else {
-            $hashPassword = password_hash($password, PASSWORD_DEFAULT);
-            mysqli_stmt_bind_param($stmt, 'sss', $username, $email, $hashPassword);
-            mysqli_stmt_execute($stmt);
-
-            header("Location: ../signup.php?signup=success");
-            exit();
-          }
+          header("Location: ../signup.php?signup=success");
+          exit();
         }
       }
+
+      $db->disconnect();
     }
-    
-    mysqli_stmt_close($stmt);
-    mysqli_close($conn);
   }
   else {
-      header("Location: ../signup.php");
+      header("Location: ../signup.phpp");
       exit();
-   }
+  }

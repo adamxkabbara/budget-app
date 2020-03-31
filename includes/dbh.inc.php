@@ -1,13 +1,39 @@
 <?php
+ini_set('display_errors', 1);
 
-  $servername = "budget-app-database-1.cqlskylpfxg7.us-east-1.rds.amazonaws.com";
-  $dbUsername = "admin";
-  $dbPassword = "";
-  $dbName = "auth";
-  $dbPort = 3306;
+  class Database {
+    
+    private $servername;
+    private $dbUsername;
+    private $dbPassword;
+    private $dbName;
+    private $dbPort;
+    private $conn;
 
-  $conn = mysqli_connect($servername, $dbUsername, $dbPassword, $dbName, $dbPort);
+    public function connect() {
 
-  if (!$conn) {
-    die("Connection failed: ".mysqli_connect_error());
+      // Check if connection already exists
+      if ($this->conn) {
+        die("Connection already established");
+      }
+
+      $this->servername = "";
+      $this->dbUsername = "";
+      $this->dbPassword = "";
+      $this->dbName = "";
+      $this->dbPort = null;
+
+      $this->conn = mysqli_connect($this->servername, $this->dbUsername, $this->dbPassword, $this->dbName, $this->dbPort);
+
+      if (!$this->conn) {
+        die("Connection failed: ".mysqli_connect_error());
+      }
+      else {
+        return $this->conn;
+      }
+    }
+    
+    public function disconnect() {
+      mysqli_close($this->conn);
+    }
   }
