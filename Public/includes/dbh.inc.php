@@ -17,11 +17,11 @@ ini_set('display_errors', 1);
         die("Connection already established");
       }
 
-      $this->servername = "";
-      $this->dbUsername = "";
-      $this->dbPassword = "";
-      $this->dbName = "";
-      $this->dbPort = null;
+      $this->servername = getenv("DB_Server_Name");
+      $this->dbUsername = getenv("DB_Username");
+      $this->dbPassword = getenv("DB_Password");
+      $this->dbName = getenv("DB_Name");;
+      $this->dbPort = getenv("DB_Port");
 
       $this->conn = mysqli_connect($this->servername, $this->dbUsername, $this->dbPassword, $this->dbName, $this->dbPort);
 

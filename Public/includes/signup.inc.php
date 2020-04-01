@@ -4,7 +4,7 @@
 
     // include files
     include_once('./dbh.inc.php');
-    include_once('../models/User.model.php');
+    include_once('../../models/User.model.php');
 
     // Connect to db
     //require 'dbh.inc.php';
