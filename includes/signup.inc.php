@@ -3,11 +3,8 @@
   if (isset($_POST["signup-submit"])) {
 
     // include files
-    include_once('./dbh.inc.php');
-    include_once('../models/User.model.php');
-
-    // Connect to db
-    //require 'dbh.inc.php';
+    include_once('../Controllers/UserController.php');
+    include_once('../models/User.class.php');
 
     $username = $_POST["uid"]; 
     $email = $_POST["email"];
@@ -48,32 +45,24 @@
     else {
       // Check if user already exists
 
-      $db = new Database();
+      $user_obj = new User($username, $email, $password);
+      $user_controller = new UserController();
 
-      $connection = $db->connect();
+      $result = $user_controller->create($user_obj);
+      if ($result === 1062) {
+        //User taken
 
-      $user_obj = new User($connection, $username, $email, $password);
-
-      if ($user_obj->isDuplicate()) {
-          //User taken
-
-          header("Location: ../signup.php?error=userTaken&mail=$email");
-          exit();
+        header("Location: ../signup.php?error=userTaken&mail=$email");
+        exit();
+      }
+      else if ($result === 0) {
+        header("Location: ../signup.php?signup=success");
+        exit();
       }
       else {
-        // Create User
-
-        if (!$user_obj->create_user()) {
-          header("Location: ../signup.php?error=invalidsql");
-          exit();
-        }
-        else {
-          header("Location: ../signup.php?signup=success");
-          exit();
-        }
+        header("Location: ../signup.php?error=invalidsql");
+        exit();
       }
-
-      $db->disconnect();
     }
   }
   else {

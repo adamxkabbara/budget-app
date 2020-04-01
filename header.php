@@ -11,7 +11,7 @@
   <body>
     <header>
       <?php
-        if (isset($_SESSION['userId'])) {
+        if (isset($_SESSION['userUid'])) {
           // User logged in
           echo '<form action="./includes/logout.inc.php" method="post">
                   <input type="submit" name="logout-submit" value="Logout">
@@ -19,6 +19,7 @@
         }
         else {
           // NOT logged in
+          echo('no login no header');
         }
       ?>
     </header>
