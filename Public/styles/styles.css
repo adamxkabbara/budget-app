@@ -67,7 +67,7 @@ input[type="submit"] {
   border: none;
 }
 
-input[type="submit"]:hover, .main-button {
+input[type="submit"]:hover, .main-button:hover {
   background-color: var(--primary-dark-color);
   color: white;
   transition-duration: 0.3s;
