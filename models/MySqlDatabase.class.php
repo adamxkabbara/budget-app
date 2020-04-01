@@ -21,11 +21,11 @@ class MySqlDatabase implements Database
       die("Connection already established");
     }
 
-    $this->servername = getenv("DB_Server_Name");
-    $this->dbUsername = getenv("DB_Username");
-    $this->dbPassword = getenv("DB_Password");
-    $this->dbName = getenv("DB_Name");;
-    $this->dbPort = getenv("DB_Port");
+    $this->servername = '127.0.0.1';
+    $this->dbUsername = 'root';
+    $this->dbPassword = '9000';
+    $this->dbName = 'budget-app-schema';
+    $this->dbPort = '3306';
 
     $this->conn = new mysqli($this->servername, $this->dbUsername, $this->dbPassword, $this->dbName, $this->dbPort);
 
