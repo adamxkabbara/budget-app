@@ -1,5 +1,9 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <link rel="preload" href="../fonts/regular.otf" as="font" type="font/otf" crossorigin>
@@ -29,4 +33,5 @@
   require './footer.php';
   ?>
 </body>
+
 </html>

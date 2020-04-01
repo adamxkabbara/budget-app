@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <header class="navbar">
   <?php
   if (isset($_SESSION['userUid'])) {

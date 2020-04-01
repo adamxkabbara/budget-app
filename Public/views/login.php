@@ -22,7 +22,6 @@
     ];
     if (isset($_GET['error'])) {
       $errorMapping[$_GET['error']];
-
       echo '<p class="error">' . $errorMapping[$_GET["error"]] . '</p>';
     }
     ?>
