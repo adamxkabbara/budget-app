@@ -31,6 +31,9 @@
     <input type="submit" name="signup-submit" value="Sign up" required>
   </form>
   <p>Already have an account? <a href="login.php"> Sign in!</a></p>
+  <?php
+  require './footer.php';
+  ?>
 </body>
 
 </html>

@@ -16,9 +16,12 @@
     <label for="password">Password: </label>
     <input type="password" name="pwd" id="password" required>
 
-    <input type="submit" name="login-submit" value="submit">
+    <input type="submit" name="login-submit" value="Login">
   </form>
   <p>Don't have an account? <a href="signup.php"> Sign up </a></p>
+  <?php
+  require './footer.php';
+  ?>
 </body>
 
 </html>
