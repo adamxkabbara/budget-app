@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <form action="../../includes/login.inc.php" method="post">
+  <form class="form-group" action="../../includes/login.inc.php" method="post">
     <h1 class="headings">Login</h1>
     <label for="username">Username </label>
     <input type="text" name="mailuid" id="username" required>

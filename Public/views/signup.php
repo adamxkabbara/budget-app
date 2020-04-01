@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <form action="../../includes/signup.inc.php" method="post">
+  <form class="form-group" action="../../includes/signup.inc.php" method="post">
     <h1 class="headings">Sign up</h1>
     <div>
       <label for="username">Username: </label>

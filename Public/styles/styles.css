@@ -31,7 +31,7 @@ html, body {
   font-weight: normal;
 }
 
-form {
+form.form-group {
   width: 300px;
   display: block;
   margin: auto;
@@ -46,7 +46,7 @@ label {
   display: block;
   color: var(--text-body);
 }
-input {
+.form-group input {
   width: 300px;
   display: block;
   border: solid 1px var(--text-body);
@@ -67,7 +67,7 @@ input[type="submit"] {
   border: none;
 }
 
-input[type="submit"]:hover {
+input[type="submit"]:hover, .main-button {
   background-color: var(--primary-dark-color);
   color: white;
   transition-duration: 0.3s;
@@ -108,11 +108,19 @@ input[type="submit"]:hover {
 }
 
 .main-button {
-    text-decoration: none;
-    background-color: var(--primary-color);
-    padding: 5px 14px;
-    border-radius: 6px;
-    color: white;
+  text-decoration: none;
+  background-color: var(--primary-color);
+  padding: 3px 14px;
+  border-radius: 6px;
+  color: white;
+  display: inline;
+}
+
+.main-button input[type="submit"] {
+  font-size: 18px;
+  background-color: transparent;
+  color: white;
+  border: none;
 }
 
 .footer {
