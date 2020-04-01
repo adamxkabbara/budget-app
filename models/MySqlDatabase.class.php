@@ -1,7 +1,7 @@
 <?php
 ini_set('display_errors', 1);
 
-require_once(__DIR__ . '/../../Interfaces/Database.inter.php');
+require_once __DIR__.'/../Interfaces/Database.inter.php';
 
 class MySqlDatabase implements Database
 {

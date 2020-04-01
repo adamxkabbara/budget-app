@@ -7,7 +7,7 @@
     
     // include files
     include_once(__DIR__ . '/../../Controllers/UserController.php');
-    include_once(__DIR__ . '/../../models/User.class.php');
+    include_once(__DIR__ . '/../../Models/User.class.php');
 
     $mailuid = $_POST['mailuid'];
     $password = $_POST['pwd'];

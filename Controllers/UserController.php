@@ -2,8 +2,8 @@
 ini_set('display_errors', 1);
 
 include_once __DIR__ . '/../Interfaces/Controller.inter.php';
-include_once __DIR__ . '/../Public/includes/MySqlDatabase.inc.php';
-include_once __DIR__ . '/../models/User.class.php';
+include_once __DIR__ . '/../Models/MySqlDatabase.class.php';
+include_once __DIR__ . '/../Models/User.class.php';
 
 class UserController implements Controller {
 
