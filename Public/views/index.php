@@ -18,17 +18,17 @@ session_start();
   ?>
 
   <script src="../scripts/index.js"></script>
-
-  <?php
-  if (isset($_SESSION['userUid'])) {
-    echo '<h1>' . $_SESSION['userUid'] . '</h1>';
-    echo '<div id=getTime></div>';
-  } else {
-    echo '<h1>' . $_SESSION['userUid'] . '</h1>';
-    echo '<h1>NOT SIGNED IN</h1>';
-  }
-  ?>
-
+  <div class="content">
+    <?php
+    if (isset($_SESSION['userUid'])) {
+      echo '<h1>' . $_SESSION['userUid'] . '</h1>';
+      echo '<div id=getTime></div>';
+    } else {
+      echo '<h1>' . $_SESSION['userUid'] . '</h1>';
+      echo '<h1>NOT SIGNED IN</h1>';
+    }
+    ?>
+  </div>
   <?php
   require './footer.php';
   ?>
