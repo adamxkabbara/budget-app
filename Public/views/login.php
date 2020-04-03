@@ -32,7 +32,7 @@
 
     <input type="submit" name="login-submit" value="Login">
   </form>
-  <p>Don't have an account? <a href="signup.php"> Sign up </a></p>
+  <p>Don't have an account? <a href="/signup"> Sign up </a></p>
   <?php
   require './footer.php';
   ?>
