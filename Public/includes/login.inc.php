@@ -14,7 +14,7 @@
 
     if (empty($mailuid) || empty($password)) {
 
-      header('Location: ../views/login.php?error=emptyfields');
+      header('Location: /login?error=emptyfields');
       exit();
     }
     else {
@@ -28,33 +28,33 @@
         if ($pwdCheck == false) {
           // wrong password
 
-          header('Location: ../views/login.php?error=wrongpwd');
+          header('Location: /login?error=wrongpwd');
           exit();
         }
         else if ($pwdCheck == true) {
           // found user
           $_SESSION['userUid'] = $user->username;
 
-          header('Location: ../views/index.php?login=success');
+          header('Location: /dashboard?login=success');
           exit();
         }
         else {
           // unexpected condition value
 
-          header('Location: ../views/login.php?error=internalerror');
+          header('Location: /login?error=internalerror');
           exit();
         }
       }
       else {
         // No user exits
 
-        header('Location: ../views/login.php?error=nouser');
+        header('Location: /login?error=nouser');
         exit();
       }
     }
   }
   else {
 
-    header('Location: ../views/login.php');
+    header('Location: /login');
     exit();
   }

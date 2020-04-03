@@ -45,7 +45,7 @@ class UserController implements Controller {
     $stmt = $mysql->prepare($sql);
 
     if (!$stmt) {
-      return 2;
+      return 1064;
     }
     else {
       $hashPassword = password_hash($user->password, PASSWORD_DEFAULT);
