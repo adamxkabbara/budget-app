@@ -10,8 +10,8 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="data:,">
     <link type="text/css" rel="stylesheet" href="../styles/styles.css">
-    <script src="./Components/budget-card.js"></script>
-    <script src="./Components/budget-item.js"></script>
+    <script src="./components/budget-card.js"></script>
+    <script src="./components/budget-item.js"></script>
 </head>
 <style>
     budget-card {
@@ -30,16 +30,16 @@ session_start();
         ?>
         <budget-card card>
             <div slot="body">
-                <budget-item no-border item-name="Total Spent Today" value="30"></budget-item>
-                <budget-item no-border item-name="Total Spent this Month" value="50"></budget-item>
+                <budget-item no-border item-name="Total Spent Today" value="30.32"></budget-item>
+                <budget-item no-border item-name="Total Spent this Month" value="50.32"></budget-item>
             </div>
         </budget-card>
 
         <budget-card href='/' header="Recent Transactions" type='View Transactions'>
             <div slot="body">
-                <budget-item date="12/13" item-name="Transaction" category="Category" value="30"></budget-item>
-                <budget-item date="12/13" item-name="Transaction" category="Category" value="50"></budget-item>
-                <budget-item date="12/13" item-name="Transaction" category="Category" value="20"></budget-item>
+                <budget-item date="12/13" item-name="Transaction" category="Category" value="30.21"></budget-item>
+                <budget-item date="12/13" item-name="Transaction" category="Category" value="50.22"></budget-item>
+                <budget-item no-border date="12/13" item-name="Transaction" category="Category" value="20.88"></budget-item>
             </div>
         </budget-card>
 

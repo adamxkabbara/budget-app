@@ -20,7 +20,7 @@ customElements.define('budget-item',
                 }
                 .category {
                     font-size: 12px;
-                    color: var(--text-body)
+                    color: var(--text-body);
                 }
                 span:not(.value), span:not(.date){
                     display: block;
@@ -36,7 +36,9 @@ customElements.define('budget-item',
                 }
                 .no-border {
                     border-bottom: none;
-                    --padding: 0px;
+                }
+                .value {
+                    color: var(--primary-dark-color);
                 }
                 
             </style>

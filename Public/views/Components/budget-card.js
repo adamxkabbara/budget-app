@@ -20,6 +20,7 @@ customElements.define('budget-card',
                     border-radius: 5px;
                     margin: 0px 1rem;
                     transition: box-shadow .3s ease-in-out;
+                    box-shadow: 4px 4px 17px 1px rgba(33, 33, 33, 0.2);
                 }
 
                 .card:hover {
