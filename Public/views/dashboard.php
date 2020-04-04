@@ -10,8 +10,9 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="data:,">
     <link type="text/css" rel="stylesheet" href="../styles/styles.css">
-    <script src="./components/budget-card.js"></script>
-    <script src="./components/budget-item.js"></script>
+    <script src="../views/Components/budget-card.js"></script>
+    <script src="../views/Components/budget-item.js"></script>
+    <script src="../views/Components/budget-drawer.js"></script>
 </head>
 <style>
     budget-card {
