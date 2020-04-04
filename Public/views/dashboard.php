@@ -10,9 +10,8 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="data:,">
     <link type="text/css" rel="stylesheet" href="../styles/styles.css">
-    <script src="../views/Components/budget-card.js"></script>
-    <script src="../views/Components/budget-item.js"></script>
-    <script src="../views/Components/budget-drawer.js"></script>
+    <script src="../web-components/budget-card.js"></script>
+    <script src="../web-components/budget-item.js"></script>
 </head>
 <style>
     budget-card {
@@ -29,6 +28,11 @@ session_start();
         <?php
         require './header.php';
         ?>
+        <?php
+        if (!isset($_SESSION['userUid'])) {
+            header("Location: /login");
+        }
+        ?>
         <budget-card card>
             <div slot="body">
                 <budget-item no-border item-name="Total Spent Today" value="30.32"></budget-item>
@@ -36,7 +40,7 @@ session_start();
             </div>
         </budget-card>
 
-        <budget-card href='/' header="Recent Transactions" type='View Transactions'>
+        <budget-card href='/transactions' header="Recent Transactions" type='View Transactions'>
             <div slot="body">
                 <budget-item date="12/13" item-name="Transaction" category="Category" value="30.21"></budget-item>
                 <budget-item date="12/13" item-name="Transaction" category="Category" value="50.22"></budget-item>
@@ -44,7 +48,7 @@ session_start();
             </div>
         </budget-card>
 
-        <budget-card href='/' header="Latest Trends" type="View Trends">
+        <budget-card href='/trends' header="Latest Trends" type="View Trends">
             <div slot="body"></div>
         </budget-card>
     </div>
