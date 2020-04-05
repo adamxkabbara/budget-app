@@ -10,7 +10,7 @@ template.innerHTML = `
       display: inline-block;
       width: 40px;
       height: 40px;
-      background: url(../media/add1.svg) no-repeat center;
+      background: url(../media/add.svg) no-repeat center;
 
       transform: translate(0, 0);
     }
