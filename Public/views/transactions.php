@@ -30,15 +30,15 @@ session_start();
         ?>
                 <?php
                     $transactions = [
-                        ['date' => '12/13', 'category' => 'category', 'transaction'=> 'Transaction'],
-                        ['date' => '12/13', 'category' => 'category', 'transaction'=> 'Transaction'],
-                        ['date' => '12/13', 'category' => 'category', 'transaction'=> 'Transaction'],
-                        ['date' => '12/13', 'category' => 'category', 'transaction'=> 'Transaction'],
-                        ['date' => '12/13', 'category' => 'category', 'transaction'=> 'Transaction'],
-                        ['date' => '12/13', 'category' => 'category', 'transaction'=> 'Transaction'],
+                        ['date' => '12/13', 'category' => 'category', 'transaction'=> 'Transaction', 'value' => 30.21],
+                        ['date' => '12/13', 'category' => 'category', 'transaction'=> 'Transaction', 'value' => 30.21],
+                        ['date' => '12/13', 'category' => 'category', 'transaction'=> 'Transaction', 'value' => 30.21],
+                        ['date' => '12/13', 'category' => 'category', 'transaction'=> 'Transaction', 'value' => 30.21],
+                        ['date' => '12/13', 'category' => 'category', 'transaction'=> 'Transaction', 'value' => 30.21],
+                        ['date' => '12/13', 'category' => 'category', 'transaction'=> 'Transaction', 'value' => 30.21],
                     ];
                     foreach($transactions as $item){
-                        echo '<budget-item date=\'' . $item['date'] . '\' item-name=\'' . $item['transaction'] . '\' category=\'' . $item['category'] . '\' value=\'30.21\'></budget-item>';
+                        echo "<budget-item date=\"{$item['date']}\" category=\"{$item['category']}\" value=\"{$item['value']}\">{$item['transaction']}</budget-item>";
                     }
                 ?>
     </div>

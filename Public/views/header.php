@@ -2,7 +2,7 @@
 <header class="navbar">
   <label for="hamburger">&#9776;</label>
   <input type="checkbox" id="hamburger"/>
-  <a id="title" href='/'><span>Budget App</span></a>
+  <a id="title" href='/'><span> $ Budget App</span></a>
   <?php
   if (isset($_SESSION['userUid'])) {
     // User logged in
