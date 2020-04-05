@@ -32,7 +32,6 @@ budget_card.innerHTML = `
     }
 
     ::slotted(*) {
-        --height: fit-content;
         min-height: 50px;
     }
 

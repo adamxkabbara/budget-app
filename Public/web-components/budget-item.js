@@ -11,7 +11,6 @@ budget_item.innerHTML = `
         border-bottom: 1px solid var(--text-outline-light);
     }
     .item-name {
-        --color: var(--text-heading);
         font-size: 18px;
     }
     .category {

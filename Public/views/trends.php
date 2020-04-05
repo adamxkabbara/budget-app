@@ -34,7 +34,7 @@ session_start();
         <?php
         require './header.php';
         ?>
-        <budget-card card header="Spending vs Earnings">
+        <budget-card card header="Spendings vs Earnings">
             <div class="chart" slot="body">
                 <canvas id="spending-earned" height=100></canvas>
             </div>
