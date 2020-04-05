@@ -20,6 +20,7 @@ template.innerHTML = `
       border-radius: 30px;
       background-color: #76dea5;
       cursor: pointer;
+      outline:none;
     }
 
     div#ceFabContainer{
