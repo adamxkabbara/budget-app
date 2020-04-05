@@ -11,8 +11,6 @@ template.innerHTML = `
       width: 40px;
       height: 40px;
       background: url(../media/add.svg) no-repeat center;
-
-      transform: translate(0, 0);
     }
 
     button {
@@ -29,9 +27,7 @@ template.innerHTML = `
       right: 0px;
       top: 0px;
       margin-right: 60px;
-      -border-radius: 5px;
       color: #fff;
-      -background-color: #66dea5;
     }
 
     .hidden {
@@ -52,14 +48,9 @@ class FABButton extends HTMLElement {
     
     super();
 
-    //this._onSlotChange = this._onSlotChange.bind(this);
 
     this.attachShadow({mode: 'open'});
     this.shadowRoot.appendChild(template.content.cloneNode(true));
-
-    this._listSlot = this.shadowRoot.querySelector('slot[name=list]');
-
-    //this._listSlot.addEventListener('slotchange', this._onSlotChange);
 
   }
 
@@ -171,12 +162,11 @@ template1.innerHTML = `
       padding: 20px;
       cursor: pointer;
     }
-    :host()
    
   </style>
   <slot id="ceFabItemName"></slot>
 `;
-let budgetDrawerItemCount = 0;
+let FABItemCount = 0;
 
 class FABItem extends HTMLElement {
 
@@ -198,7 +188,7 @@ class FABItem extends HTMLElement {
       this.setAttribute('role', 'menuitem');
     }
     if (!this.id) {
-      this.id = 'fab-item-generated-'+budgetDrawerItemCount++;
+      this.id = 'fab-item-generated-'+FABItemCount++;
     }
 
     this.addEventListener('click', this._onClick);
@@ -206,7 +196,6 @@ class FABItem extends HTMLElement {
 
   _onClick(e) {
     if (this.href == null) return;
-
     window.location.href = this.href;
   }
 
