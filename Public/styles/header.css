@@ -1,0 +1,155 @@
+#title {
+    color: var(--primary-color);
+    display: inline-block;
+    text-decoration: none;
+    font-weight: bold;
+}
+.navbar {
+    text-align: right;
+    padding: 20px 10px;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbar img {
+    display: none;
+}
+
+.nav-link:not(.main-button) {
+    text-decoration: none;
+    color: var(--text-body);
+    margin: 20px;
+    position: relative;
+}
+
+.nav-link:not(.main-button):after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 3px;
+    display: block;
+    margin-top: 5px;
+    left: 0;
+    background: var(--primary-color);
+    transition: width 0.2s ease;
+}
+
+.navbar a:not(.main-button):hover:after {
+    width: 100%;
+}
+
+.main-button {
+    text-decoration: none;
+    background-color: var(--primary-color);
+    padding: 3px 14px;
+    border-radius: 6px;
+    color: var(--text-body-light);
+    display: inline;
+}
+
+.main-button input[type="submit"] {
+    font-size: 18px;
+    background-color: transparent;
+    border: none;
+}
+
+.navbar ul {
+    margin: auto 0;
+    padding: 0;
+}
+
+.navbar label,
+#hamburger {
+    cursor: pointer;
+    margin: auto 0;
+    display: none;
+}
+
+@media screen and (max-device-width: 768px), (max-width: 987px) {
+    @keyframes slide-in {
+        100% { transform: translateX(0%); }
+    }
+        
+    @keyframes slide-out {
+        0% { transform: translateX(0%); }
+        100% { transform: translateX(-100%); }
+    }
+
+    #title {
+        color: var(--primary-background);
+        display: inline-block;
+        margin: auto;
+    }
+
+    #close {
+        color: var(--text-body);
+        cursor: pointer;
+        margin: 10px;
+    }
+    .navbar {
+        text-align: left;
+        height: 100%;
+        padding: 0;
+        background-color: var(--primary-color);
+    }
+
+    .navbar label {
+        display: inline-block;
+        width: fit-content;
+        color: var(--primary-background);
+        padding: 10px;
+    }
+
+    .navbar .main-button {
+        padding: 20px;
+        color: var(--primary-background);
+    }
+
+    .navbar ul a,
+    .navbar a:not(.main-button),
+    .main-button {
+        display: flex;
+        margin: 0;
+        padding: 20px;
+        background-color: transparent;
+    }
+
+    .navbar a:hover, .main-button:hover {
+        background-color: var(--primary-color);
+        transition-duration: 0.3s;
+    }
+
+    .navbar input:checked ~ ul {
+        height: 100%;
+        display: block;
+        animation: slide-in 250ms forwards;
+        width: 70%;
+        position: absolute;
+        transform: translateX(-100%);
+        background-color: var(--background-color);
+    }
+
+    .slide-out {
+        animation: slide-out 0.5s forwards;
+    }
+
+    .navbar ul {
+        display: none;
+    }
+    .navbar img {
+        display: block;
+        padding: 0 20px 0 0;
+    }
+
+    .navbar a:not(.main-button):hover:after {
+        width: 0%;
+    }
+
+    .main-button input[type="submit"],
+    .main-button:hover {
+        background-color: transparent;
+        border: none;
+        color: var(--text-body);
+    }
+}

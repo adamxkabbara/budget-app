@@ -13,7 +13,6 @@ session_start();
     <link type="text/css" rel="stylesheet" href="../styles/styles.css">
     <script src="../web-components/budget-card.js"></script>
     <script src="../web-components/budget-item.js"></script>
-    <script src="../web-components/fab-item.js"></script>
 </head>
 <style>
     budget-card {

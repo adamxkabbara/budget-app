@@ -15,11 +15,11 @@ session_start();
 </head>
 <style>
     budget-card {
-        margin: 0px 25px;
+        margin: 0 25px;
     }
 
     ul {
-        padding: 0px;
+        padding: 0;
     }
 </style>
 

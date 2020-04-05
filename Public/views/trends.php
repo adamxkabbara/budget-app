@@ -52,7 +52,8 @@ session_start();
                     }, ]
                 },
                 options: {
-                    maintainAspectRatio: true,
+                    responsive: true,
+                    maintainAspectRatio: false,
                     legend: {
                         display: false
                     },
@@ -96,8 +97,8 @@ session_start();
                 legend: {
                     position: 'right'
                 },
-                responsive: false,
-                maintainAspectRatio: true
+                responsive: true,
+                maintainAspectRatio: false
             }
             var ctx = document.getElementById('spending-breakdown').getContext('2d');
             var myPieChart = new Chart(ctx, {
@@ -124,6 +125,8 @@ session_start();
                     }]
                 },
                 options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
                     legend: {
                         display: false
                     },
