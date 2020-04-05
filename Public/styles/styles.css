@@ -1,0 +1,140 @@
+:root {
+  --primary-color: #66dea5;
+  --primary-dark-color: #5fca97;
+
+  --secondary-color: #676968;
+  --highlight-color: rgb(194, 95, 95);
+
+  --text-heading: #676968;
+  --text-body: #b4a8a8;
+}
+
+@font-face {
+  font-family: 'Brandon';
+  src: url('../fonts/regular.otf');
+}
+
+html, body {
+  min-height: 100vh;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  display: block;
+  text-align: center;
+  font-family: 'Brandon', sans-serif;
+  color: var(--text-body);
+}
+
+.headings {
+  color: var(--text-heading);
+  text-align: center;
+  font-weight: normal;
+}
+
+form.form-group {
+  width: 300px;
+  display: block;
+  margin: auto;
+  text-align: left;
+  border: solid 1px var(--primary-color);
+  border-radius: 10px;
+  margin-top: 4%;
+  padding: 20px;
+}
+label {
+  width: 200px;
+  display: block;
+  color: var(--text-body);
+}
+.form-group input {
+  width: 300px;
+  display: block;
+  border: solid 1px var(--text-body);
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  height: 38px;
+  outline: none;
+  font-size: 20px;
+}
+
+input:focus {
+  border: solid 1px var(--primary-color);
+}
+
+input[type="submit"] {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+}
+
+input[type="submit"]:hover, .main-button:hover {
+  background-color: var(--primary-dark-color);
+  color: white;
+  transition-duration: 0.3s;
+  cursor:pointer;
+}
+
+.error {
+  color: var(--highlight-color);
+  text-align: center;
+}
+
+.navbar {
+    text-align: right;
+    padding: 20px 10px;
+    font-size: 20px;
+}
+
+.navbar a:not(.main-button) {
+  text-decoration: none;
+  color: var(--text-body);
+  margin: 40px;
+  position: relative;
+}
+
+.navbar a:not(.main-button):after {
+  content: '';
+  position: absolute;
+  width: 0; height: 3px;
+  display: block;
+  margin-top: 5px;
+  left: 0;
+  background: var(--primary-color);
+  transition: width .2s ease;
+}
+
+.navbar a:not(.main-button):hover:after {
+  width: 100%;
+}
+
+.main-button {
+  text-decoration: none;
+  background-color: var(--primary-color);
+  padding: 3px 14px;
+  border-radius: 6px;
+  color: white;
+  display: inline;
+}
+
+.main-button input[type="submit"] {
+  font-size: 18px;
+  background-color: transparent;
+  color: white;
+  border: none;
+}
+
+.footer {
+  position: absolute;
+  text-align: right;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
+  color: white;
+  font-size: 18px;
+  background-color: var(--primary-color);
+}
+
+.footer span {
+  display: inline-block;
+  margin: 10px;
+}
