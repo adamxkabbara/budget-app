@@ -13,6 +13,8 @@ session_start();
   <link type="text/css" rel="stylesheet" href="../styles/styles.css">
   <script src="../web-components/budgetDrawer.js"></script>
   <style>
+    fab-button{
+    }
     fab-item {
       background-color: #5fca97;
     }
