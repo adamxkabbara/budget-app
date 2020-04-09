@@ -94,7 +94,7 @@ session_start();
                     legend: {
                         position: 'right'
                     },
-                    responsive: false,
+                    responsive: true,
                     maintainAspectRatio: false
                 }
                 var ctx = document.getElementById('spending-breakdown').getContext('2d');
