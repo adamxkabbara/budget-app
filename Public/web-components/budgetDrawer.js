@@ -23,10 +23,10 @@ template.innerHTML = `
       outline:none;
     }
 
-    div#ceFabContainer{
+    div#ceFabContainer {
       position: absolute;
-      right: 0px;
-      top: 0px;
+      top: -115px;
+      left: -15px;
       margin-right: 60px;
       color: #fff;
     }
@@ -46,11 +46,11 @@ template.innerHTML = `
 class FABButton extends HTMLElement {
 
   constructor() {
-    
+
     super();
 
 
-    this.attachShadow({mode: 'open'});
+    this.attachShadow({ mode: 'open' });
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
   }
@@ -66,11 +66,11 @@ class FABButton extends HTMLElement {
     Promise.all([
       customElements.whenDefined('fab-item')
     ])
-    .then(() => {
-      let items = this._allItems();
+      .then(() => {
+        let items = this._allItems();
 
 
-    })
+      })
   }
 
   disconnectedCallback() {
@@ -98,7 +98,7 @@ class FABButton extends HTMLElement {
   }
 
   set open(val) {
-    
+
     if (val) {
       this.setAttribute('open', '');
     }
@@ -126,7 +126,7 @@ class FABButton extends HTMLElement {
     if (this.disabled) {
       this.setAttribute('tabindex', '-1');
       this.setAttribute('aria-disabled', 'true');
-    } 
+    }
     else {
       this.setAttribute('tabindex', '0');
       this.setAttribute('aria-disabled', 'false');
@@ -160,7 +160,7 @@ template1.innerHTML = `
 
     :host {
       display: block;
-      padding: 20px;
+      padding: 10px;
       cursor: pointer;
     }
    
@@ -179,7 +179,7 @@ class FABItem extends HTMLElement {
 
     super();
 
-    this.attachShadow({mode: 'open'});
+    this.attachShadow({ mode: 'open' });
     this.shadowRoot.appendChild(template1.content.cloneNode(true));
   }
 
@@ -189,7 +189,7 @@ class FABItem extends HTMLElement {
       this.setAttribute('role', 'menuitem');
     }
     if (!this.id) {
-      this.id = 'fab-item-generated-'+FABItemCount++;
+      this.id = 'fab-item-generated-' + FABItemCount++;
     }
 
     this.addEventListener('click', this._onClick);

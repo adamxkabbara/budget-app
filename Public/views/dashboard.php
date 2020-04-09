@@ -15,32 +15,47 @@ session_start();
     <script src="../web-components/budget-item.js"></script>
     <script src="../web-components/budgetDrawer.js"></script>
     <style>
-        fab-button {}
+        fab-button {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            box-shadow: 0 5px 11px 4px rgba(0, 0, 0, 0.18), 0 4px 12px -7px rgba(0, 0, 0, 0.15);
+            border-radius: 50%;
+        }
+
+        fab-button:hover {
+            transition-duration: 0.3s;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px 9px rgba(0, 0, 0, 0.18), 0 4px 17px 0px rgba(0, 0, 0, 0.15);
+        }
 
         fab-item {
+            box-shadow: 0 3px 10px 0px rgba(0, 0, 0, 0.18), 0 3px 20px 0px rgba(0, 0, 0, 0.15);
+            transition-duration: .3s;
             background-color: #5fca97;
+            border-radius: 10px;
+            margin: 10px 0;
         }
 
         fab-item:hover {
             background-color: #76dea5;
         }
+
+        budget-card {
+            margin: 0px 25px;
+            max-width: 900px;
+        }
+
+        ul {
+            padding: 0px;
+        }
+
+        .chart {
+            margin: 10px;
+        }
     </style>
     <title>dashboard</title>
 </head>
-<style>
-    budget-card {
-        margin: 0px 25px;
-        max-width: 900px;
-    }
-
-    ul {
-        padding: 0px;
-    }
-
-    .chart {
-        margin: 10px;
-    }
-</style>
 
 <body>
     <div class="content">
@@ -110,9 +125,6 @@ session_start();
         <fab-item href="/login">Revenue</fab-item>
         <fab-item href="/login">Expense</fab-item>
     </fab-button>
-    <?php
-    require './footer.php';
-    ?>
 </body>
 
 </html>
