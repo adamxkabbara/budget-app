@@ -13,6 +13,19 @@ session_start();
     <link type="text/css" rel="stylesheet" href="../styles/styles.css">
     <script src="../web-components/budget-card.js"></script>
     <script src="../web-components/budget-item.js"></script>
+    <script src="../web-components/budgetDrawer.js"></script>
+    <style>
+        fab-button {}
+
+        fab-item {
+            background-color: #5fca97;
+        }
+
+        fab-item:hover {
+            background-color: #76dea5;
+        }
+    </style>
+    <title>dashboard</title>
 </head>
 <style>
     budget-card {
@@ -93,6 +106,10 @@ session_start();
             </script>
         </div>
     </div>
+    <fab-button>
+        <fab-item href="/login">Revenue</fab-item>
+        <fab-item href="/login">Expense</fab-item>
+    </fab-button>
     <?php
     require './footer.php';
     ?>

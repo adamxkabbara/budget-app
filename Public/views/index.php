@@ -6,9 +6,6 @@
   <title>Budget-App</title>
 </head>
 <body>
-  <?php
-    require './header.php';
-  ?>
 
   <h1>budget-app is here to help you pilot your finances</h1>
 
