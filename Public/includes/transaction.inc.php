@@ -20,13 +20,14 @@
         }
         else {
       
-            $userId = $_SESSION['UID'];
-            $date = date("Y-m-d H:i:s");
+            $userId = $_SESSION['userUid'];
+            //$date = date("Y-m-d H:i:s");
             $expense_obj = new Expense(null, $userID, null, $merchant, $amount, $category, $notes, $date, null);
             $expense_controller = new ExpenseController();
       
             $result = $expense_controller->create($expense_obj);
             echo $result;
+            echo $userId;
             if ($result === SUCCESS) {
               //header("Location: /dashboard?transaction=success");
               exit();

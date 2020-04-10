@@ -145,14 +145,6 @@ session_start();
                     <input type="button" value="Cancel" onClick="javascript:history.back()">
                     <input type="submit" name="signup-submit" value="Add" required>
                 </div>
-<<<<<<< HEAD
-                <div class="button-group">
-                    <input type="button" value="Cancel" onClick="javascript:history.back()">
-                    <input type="submit" name="transaction-submit" value="Add" required>
-                </div>
-
-=======
->>>>>>> 034d38c299d6bceb3983be2a1e7dddf376b85efa
             </form>
             <script>
                 document.getElementsByName('type')[0].checked = <?php echo (isset($_GET['type']) && $_GET['type'] === '0') ? 'true; showExpense();' : 'false; showRevenue();'; ?>
