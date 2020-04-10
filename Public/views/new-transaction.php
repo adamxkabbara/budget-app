@@ -131,12 +131,12 @@ session_start();
                     <input id="revenue" type="radio" value="1" name="type" oninput="on_change(event)"><label for="revenue">Revenue</label>
                 </div>
                 <div id="name-input">
-                    <label for="name">Merchant </label>
-                    <input type="text" name="name" required>
+                    <label for="merchant">Merchant </label>
+                    <input type="text" name="merchant" required>
                 </div>
                 <div id="category-input">
                     <label for="category">Category </label>
-                    <select>
+                    <select name="category">
                         <option value="housing">Housing</option>
                         <option value="transportation">Transporation</option>
                         <option value="food">Food & Dining</option>
@@ -156,7 +156,7 @@ session_start();
 
                 <div class="button-group">
                     <input type="button" value="Cancel" onClick="javascript:history.back()">
-                    <input type="submit" name="ransaction-submit" value="Add">
+                    <input type="submit" name="transaction-submit" value="Add">
                 </div>
             </form>
             <script>
