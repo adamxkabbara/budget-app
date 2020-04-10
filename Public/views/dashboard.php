@@ -122,8 +122,8 @@ session_start();
         </div>
     </div>
     <fab-button>
-        <fab-item href="/new-transaction?type=0">Revenue</fab-item>
-        <fab-item href="/new-transaction?type=1">Expense</fab-item>
+        <fab-item href="/new-transaction?type=1">Revenue</fab-item>
+        <fab-item href="/new-transaction?type=0">Expense</fab-item>
     </fab-button>
 </body>
 

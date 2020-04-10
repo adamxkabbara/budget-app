@@ -18,6 +18,7 @@ session_start();
         form.form-group {
             border: none;
         }
+
         select {
             width: 300px;
             height: 38px;
@@ -35,7 +36,6 @@ session_start();
         textarea {
             width: 300px;
             height: 150px;
-            margin: 2px;
         }
 
         .button-group,
@@ -47,6 +47,7 @@ session_start();
         .toggle-field {
             margin-bottom: 30px;
         }
+
         .toggle-field input[type="radio"] {
             opacity: 0;
             position: fixed;
@@ -72,7 +73,7 @@ session_start();
             display: none;
         }
 
-        label[for="transaction"] {
+        label[for="expense"] {
             border-bottom-left-radius: 5px;
             border-top-left-radius: 5px;
         }
@@ -85,13 +86,20 @@ session_start();
     <script>
         function on_change(el) {
             if (el.target.value === '0') {
-                console.log('transaction')
-                document.getElementById('revenue-form').classList.add('hidden');
-                document.getElementById('transaction-form').classList.remove('hidden');
+                showExpense()
             } else {
-                document.getElementById('revenue-form').classList.remove('hidden');
-                document.getElementById('transaction-form').classList.add('hidden');
+                showRevenue()
             }
+        }
+
+        function showExpense() {
+            document.getElementById('revenue-form').classList.add('hidden');
+            document.getElementById('expense-form').classList.remove('hidden');
+        }
+
+        function showRevenue() {
+            document.getElementById('revenue-form').classList.remove('hidden');
+            document.getElementById('expense-form').classList.add('hidden');
         }
     </script>
 </head>
@@ -109,10 +117,10 @@ session_start();
         <div class="container">
             <form class="form-group" action="" method="post" id="add-form">
                 <div class="toggle-field">
-                    <input id="transaction" type="radio" value="0" name="type" oninput="on_change(event)"><label for="transaction">Transaction</label>
+                    <input id="expense" type="radio" value="0" name="type" oninput="on_change(event)"><label for="expense">Expense</label>
                     <input id="revenue" type="radio" value="1" name="type" oninput="on_change(event)"><label for="revenue">Revenue</label>
                 </div>
-                <div id="transaction-form">
+                <div id="expense-form">
                     <label for="name">Merchant </label>
                     <input type="text" name="name" required>
                     <label for="category">Category </label>
@@ -130,17 +138,17 @@ session_start();
                     <textarea name="notes" form="add-form"></textarea>
                 </div>
                 <div id="revenue-form" class="hidden">
-                    <label for="name">Merchant </label>
-                    <input type="text" name="name" required>
                     <label for="amount">Amount</label>
                     <input type="number" name="amount" step=".01" required>
                 </div>
-                <div class="button-group"><input type="button" value="Cancel" onClick="javascript:history.back()"><input type="submit" name="signup-submit" value="Add" required></div>
-
+                <div class="button-group">
+                    <input type="button" value="Cancel" onClick="javascript:history.back()">
+                    <input type="submit" name="signup-submit" value="Add" required>
+                </div>
             </form>
             <script>
-                document.getElementsByName('type')[0].checked =  <?php echo (isset($_GET['type']) && $_GET['type'] === '0') ? 'true;' : 'false;'; ?>
-                document.getElementsByName('type')[1].checked =  <?php echo (isset($_GET['type']) && $_GET['type'] === '1') ? 'true;' : 'false;'; ?>
+                document.getElementsByName('type')[0].checked = <?php echo (isset($_GET['type']) && $_GET['type'] === '0') ? 'true; showExpense();' : 'false; showRevenue();'; ?>
+                document.getElementsByName('type')[1].checked = <?php echo (isset($_GET['type']) && $_GET['type'] === '1') ? 'true; showRevenue();' : 'false; showExpense();'; ?>
             </script>
         </div>
     </div>
