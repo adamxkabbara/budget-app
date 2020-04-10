@@ -11,78 +11,10 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="data:,">
     <link type="text/css" rel="stylesheet" href="../styles/styles.css">
+    <link type="text/css" rel="stylesheet" href="../styles/transactions.css">
     <script src="../web-components/budget-card.js"></script>
     <script src="../web-components/budget-item.js"></script>
     <script src="../web-components/budgetDrawer.js"></script>
-    <style>
-        form.form-group {
-            border: none;
-        }
-
-        select {
-            width: 300px;
-            height: 38px;
-            margin-bottom: 1rem;
-            border-radius: 5px;
-            font-family: Brandon;
-            font-size: 18px;
-        }
-
-        input[type="button"],
-        input[type="submit"] {
-            margin: 5px;
-        }
-
-        textarea {
-            width: 300px;
-            height: 150px;
-        }
-
-        .button-group,
-        .toggle-field {
-            display: flex;
-            margin: 10px 0;
-        }
-
-        .toggle-field {
-            margin-bottom: 30px;
-        }
-
-        .toggle-field input[type="radio"] {
-            opacity: 0;
-            position: fixed;
-            width: 0;
-        }
-
-        .toggle-field label {
-            background-color: var(--text-body-light);
-            color: var(--primary-color);
-            border: solid .1rem var(--primary-color);
-            text-align: center;
-            padding: 5px 10px;
-            transition: all 0.2s ease-in-out;
-        }
-
-        .toggle-field input[type="radio"]:checked+label {
-            background-color: var(--primary-color);
-            color: var(--text-body-light);
-            box-shadow: none;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        label[for="expense"] {
-            border-bottom-left-radius: 5px;
-            border-top-left-radius: 5px;
-        }
-
-        label[for="revenue"] {
-            border-bottom-right-radius: 5px;
-            border-top-right-radius: 5px;
-        }
-    </style>
     <script>
         function on_change(el) {
             if (el.target.value === '0') {
