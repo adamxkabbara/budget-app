@@ -15,6 +15,9 @@ session_start();
     <script src="../web-components/budget-item.js"></script>
     <script src="../web-components/budgetDrawer.js"></script>
     <style>
+        form.form-group {
+            border: none;
+        }
         select {
             width: 300px;
             height: 38px;
@@ -26,8 +29,7 @@ session_start();
 
         input[type="button"],
         input[type="submit"] {
-            width: 125px;
-            margin: 15px;
+            margin: 5px;
         }
 
         textarea {
@@ -35,11 +37,63 @@ session_start();
             height: 150px;
             margin: 2px;
         }
-        .button-group {
+
+        .button-group,
+        .toggle-field {
             display: flex;
+            margin: 10px 0;
+        }
+
+        .toggle-field {
+            margin-bottom: 30px;
+        }
+        .toggle-field input[type="radio"] {
+            opacity: 0;
+            position: fixed;
+            width: 0;
+        }
+
+        .toggle-field label {
+            background-color: var(--text-body-light);
+            color: var(--primary-color);
+            border: solid .1rem var(--primary-color);
+            text-align: center;
+            padding: 5px 10px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .toggle-field input[type="radio"]:checked+label {
+            background-color: var(--primary-color);
+            color: var(--text-body-light);
+            box-shadow: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        label[for="transaction"] {
+            border-bottom-left-radius: 5px;
+            border-top-left-radius: 5px;
+        }
+
+        label[for="revenue"] {
+            border-bottom-right-radius: 5px;
+            border-top-right-radius: 5px;
         }
     </style>
-    <title>add</title>
+    <script>
+        function on_change(el) {
+            if (el.target.value === '0') {
+                console.log('transaction')
+                document.getElementById('revenue-form').classList.add('hidden');
+                document.getElementById('transaction-form').classList.remove('hidden');
+            } else {
+                document.getElementById('revenue-form').classList.remove('hidden');
+                document.getElementById('transaction-form').classList.add('hidden');
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -53,13 +107,14 @@ session_start();
         }
         ?>
         <div class="container">
-            <form class="form-group" action="" method="post" id="transaction-form">
-                <h1 class="headings">Add Transaction</h1>
-                <div>
+            <form class="form-group" action="" method="post" id="add-form">
+                <div class="toggle-field">
+                    <input id="transaction" type="radio" value="0" name="type" oninput="on_change(event)"><label for="transaction">Transaction</label>
+                    <input id="revenue" type="radio" value="1" name="type" oninput="on_change(event)"><label for="revenue">Revenue</label>
+                </div>
+                <div id="transaction-form">
                     <label for="name">Merchant </label>
                     <input type="text" name="name" required>
-                </div>
-                <div>
                     <label for="category">Category </label>
                     <select name="category">
                         <option value="0">Housing</option>
@@ -69,19 +124,24 @@ session_start();
                         <option value="4">Entertainment</option>
                         <option value="5">Shopping</option>
                     </select>
-                </div>
-                <div>
                     <label for="amount">Amount</label>
-                    <input type="number" name="amount" required>
-                </div>
-                <div>
+                    <input type="number" name="amount" step=".01" required>
                     <label for="notes">Notes</label>
-                    <textarea name="notes" form="transaction-form"></textarea>
+                    <textarea name="notes" form="add-form"></textarea>
+                </div>
+                <div id="revenue-form" class="hidden">
+                    <label for="name">Merchant </label>
+                    <input type="text" name="name" required>
+                    <label for="amount">Amount</label>
+                    <input type="number" name="amount" step=".01" required>
                 </div>
                 <div class="button-group"><input type="button" value="Cancel" onClick="javascript:history.back()"><input type="submit" name="signup-submit" value="Add" required></div>
 
             </form>
-
+            <script>
+                document.getElementsByName('type')[0].checked =  <?php echo (isset($_GET['type']) && $_GET['type'] === '0') ? 'true;' : 'false;'; ?>
+                document.getElementsByName('type')[1].checked =  <?php echo (isset($_GET['type']) && $_GET['type'] === '1') ? 'true;' : 'false;'; ?>
+            </script>
         </div>
     </div>
 </body>
