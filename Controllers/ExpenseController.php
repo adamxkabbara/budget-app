@@ -49,7 +49,8 @@ class ExpenseController implements Controller {
     }
     else {
 
-      $stmt->bind_param('ssssssss', $transaction->idUser, null, $transaction->merchant, $transaction->amount, $transaction->category, $transaction->notes, $transaction->date, $transaction->status);
+      $err = NULL;
+      $stmt->bind_param('ssssssss', $transaction->idUser, $err, $transaction->merchant, $transaction->amount, $transaction->category, $transaction->notes, $transaction->date, $transaction->status);
       $stmt->execute();
 
       return $stmt->errno;
