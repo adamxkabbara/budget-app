@@ -93,13 +93,23 @@ session_start();
         }
 
         function showExpense() {
-            document.getElementById('revenue-form').classList.add('hidden');
-            document.getElementById('expense-form').classList.remove('hidden');
+            document.getElementById('name-input').classList.remove('hidden');
+            document.getElementById('category-input').classList.remove('hidden');
+            document.getElementById('notes-input').classList.remove('hidden');
+
+            document.querySelector('#name-input input').removeAttribute('disabled')
+            document.querySelector('#category-input select').removeAttribute('disabled')
+            document.querySelector('#notes-input textarea').removeAttribute('disabled')
         }
 
         function showRevenue() {
-            document.getElementById('revenue-form').classList.remove('hidden');
-            document.getElementById('expense-form').classList.add('hidden');
+            document.getElementById('name-input').classList.add('hidden');
+            document.getElementById('category-input').classList.add('hidden');
+            document.getElementById('notes-input').classList.add('hidden');
+
+            document.querySelector('#name-input input').setAttribute('disabled', true);
+            document.querySelector('#category-input select').setAttribute('disabled', true);
+            document.querySelector('#notes-input textarea').setAttribute('disabled', true);
         }
     </script>
 </head>
@@ -120,11 +130,13 @@ session_start();
                     <input id="expense" type="radio" value="0" name="type" oninput="on_change(event)"><label for="expense">Expense</label>
                     <input id="revenue" type="radio" value="1" name="type" oninput="on_change(event)"><label for="revenue">Revenue</label>
                 </div>
-                <div id="expense-form">
+                <div id="name-input">
                     <label for="name">Merchant </label>
                     <input type="text" name="name" required>
+                </div>
+                <div id="category-input">
                     <label for="category">Category </label>
-                    <select name="category">
+                    <select>
                         <option value="housing">Housing</option>
                         <option value="transportation">Transporation</option>
                         <option value="food">Food & Dining</option>
@@ -132,18 +144,19 @@ session_start();
                         <option value="entertainment">Entertainment</option>
                         <option value="shopping">Shopping</option>
                     </select>
+                </div>
+                <div id="amount-input">
                     <label for="amount">Amount</label>
-                    <input type="number" name="amount" step=".01" required>
+                    <input type="number" name="amount" step=".01">
+                </div>
+                <div id="notes-input">
                     <label for="notes">Notes</label>
-                    <textarea name="notes" form="add-form"></textarea>
+                    <textarea name="notes"></textarea>
                 </div>
-                <div id="revenue-form" class="hidden">
-                    <label for="amount">Amount</label>
-                    <input type="number" name="amount" step=".01" required>
-                </div>
+
                 <div class="button-group">
                     <input type="button" value="Cancel" onClick="javascript:history.back()">
-                    <input type="submit" name="signup-submit" value="Add" required>
+                    <input type="submit" name="ransaction-submit" value="Add">
                 </div>
             </form>
             <script>

@@ -16,14 +16,16 @@
           <form class="main-button" action="../../includes/logout.inc.php" method="post">
           <img src=\'../media/logout.svg\' width=30 height=30/><input type="submit" name="logout-submit" value="Logout">
           </form>
-          </ul>';
+          </ul>
+          
+          <script>
+          document.querySelector("#close").addEventListener("click", function() {
+          document.querySelector("#hamburger").checked = false;
+          })
+          </script>
+          ';
   } else {
     // NOT logged in
   }
   ?>
 </header>
-<script>
-  document.querySelector('#close').addEventListener('click', function() {
-    document.querySelector('#hamburger').checked = false;
-  })
-</script>
