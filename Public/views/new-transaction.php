@@ -30,6 +30,11 @@ session_start();
             margin: 15px;
         }
 
+        textarea {
+            width: 300px;
+            height: 150px;
+            margin: 2px;
+        }
         .button-group {
             display: flex;
         }
@@ -48,10 +53,10 @@ session_start();
         }
         ?>
         <div class="container">
-            <form class="form-group" action="" method="post">
+            <form class="form-group" action="" method="post" id="transaction-form">
                 <h1 class="headings">Add Transaction</h1>
                 <div>
-                    <label for="name">Transaction Name </label>
+                    <label for="name">Merchant </label>
                     <input type="text" name="name" required>
                 </div>
                 <div>
@@ -68,6 +73,10 @@ session_start();
                 <div>
                     <label for="amount">Amount</label>
                     <input type="number" name="amount" required>
+                </div>
+                <div>
+                    <label for="notes">Notes</label>
+                    <textarea name="notes" form="transaction-form"></textarea>
                 </div>
                 <div class="button-group"><input type="button" value="Cancel" onClick="javascript:history.back()"><input type="submit" name="signup-submit" value="Add" required></div>
 
