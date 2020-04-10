@@ -12,7 +12,7 @@ class Expense {
     public $notes;
     public $status;
 
-    public function __construct($idExpense=null, $idUser=null, $idItem=null, $merchant=null, $amount=null, $category=null, $notes=null, $date=null, $status=null) {
+    public function __construct($idExpense=null, $idUser=null, $idItem=null, $merchant=null, $amount=null, $notes=null, $category=null, $date=null, $status=null) {
 
         $this->$idExpense = $idExpense;
         $this->idUser = $idUser;

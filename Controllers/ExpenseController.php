@@ -41,16 +41,14 @@ class ExpenseController implements Controller {
     $db = new MySqlDatabase();
     $mysql = $db->connect();
 
-    $sql = 'INSERT INTO expenses (idUser, idItem, merchant, amount, date, category, notes, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+    $sql = 'INSERT INTO expenses (idUser, merchant, amount, notes, category, date, status) VALUES (?, ?, ?, ?, ?, ?, ?)';
     $stmt = $mysql->prepare($sql);
 
     if (!$stmt) {
       return 1064;
     }
     else {
-
-      $err = NULL;
-      $stmt->bind_param('ssssssss', $transaction->idUser, $err, $transaction->merchant, $transaction->amount, $transaction->category, $transaction->notes, $transaction->date, $transaction->status);
+      $stmt->bind_param('sssssss', $transaction->idUser, $transaction->merchant, $transaction->amount, $transaction->notes, $transaction->category, $transaction->date, $transaction->status);
       $stmt->execute();
 
       return $stmt->errno;
