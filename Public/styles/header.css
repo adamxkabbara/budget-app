@@ -103,7 +103,7 @@
     }
 
     .navbar .main-button {
-        padding: 20px;
+        padding: 10px;
         color: var(--primary-background);
     }
 
@@ -126,7 +126,7 @@
         height: 100%;
         display: block;
         animation: slide-in 250ms forwards;
-        width: 70%;
+        width: 60%;
         position: absolute;
         transform: translateX(-100%);
         background-color: var(--background-color);

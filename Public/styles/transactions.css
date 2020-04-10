@@ -44,6 +44,7 @@ textarea {
     text-align: center;
     padding: 5px 10px;
     transition: all 0.2s ease-in-out;
+    cursor: pointer;
 }
 
 .toggle-field input[type="radio"]:checked+label {
