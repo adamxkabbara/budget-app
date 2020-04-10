@@ -5,7 +5,7 @@
     // include files
     include_once __DIR__ . '/../../Controllers/UserController.php';
     include_once __DIR__ . '/../../models/User.class.php';
-    include_once __DIR__ . '/../../Utils/Constants.inc.php';
+    include_once __DIR__ . '/../../Utils/Constants.php';
 
     $username = $_POST["uid"]; 
     $email = $_POST["email"];
@@ -64,7 +64,7 @@
         exit();
       }
       else {
-        header("Location: /signup.php?error=invalid");
+        header("Location: /signup?error=invalid");
         exit();
       }
     }

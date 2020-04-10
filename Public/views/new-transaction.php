@@ -53,21 +53,21 @@ session_start();
         }
         ?>
         <div class="container">
-            <form class="form-group" action="" method="post" id="transaction-form">
+            <form class="form-group" action="../includes/transaction.inc.php" method="post" id="transaction-form">
                 <h1 class="headings">Add Transaction</h1>
                 <div>
                     <label for="name">Merchant </label>
-                    <input type="text" name="name" required>
+                    <input type="text" name="merchant" required>
                 </div>
                 <div>
                     <label for="category">Category </label>
                     <select name="category">
-                        <option value="0">Housing</option>
-                        <option value="1">Transporation</option>
-                        <option value="2">Food & Dining</option>
-                        <option value="3">Medical</option>
-                        <option value="4">Entertainment</option>
-                        <option value="5">Shopping</option>
+                        <option value="housing">Housing</option>
+                        <option value="transportation">Transporation</option>
+                        <option value="food">Food & Dining</option>
+                        <option value="medical">Medical</option>
+                        <option value="entertainment">Entertainment</option>
+                        <option value="shopping">Shopping</option>
                     </select>
                 </div>
                 <div>
@@ -78,7 +78,10 @@ session_start();
                     <label for="notes">Notes</label>
                     <textarea name="notes" form="transaction-form"></textarea>
                 </div>
-                <div class="button-group"><input type="button" value="Cancel" onClick="javascript:history.back()"><input type="submit" name="signup-submit" value="Add" required></div>
+                <div class="button-group">
+                    <input type="button" value="Cancel" onClick="javascript:history.back()">
+                    <input type="submit" name="transaction-submit" value="Add" required>
+                </div>
 
             </form>
 

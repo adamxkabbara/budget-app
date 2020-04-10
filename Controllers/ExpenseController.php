@@ -3,9 +3,9 @@ ini_set('display_errors', 1);
 
 include_once __DIR__ . '/../Interfaces/Controller.inter.php';
 include_once __DIR__ . '/../Models/MySqlDatabase.class.php';
-include_once __DIR__ . '/../Models/Transaction.class.php';
+include_once __DIR__ . '/../Models/Expense.class.php';
 
-class UserController implements Controller {
+class ExpenseController implements Controller {
 
   function get($idTransaction) {
 
@@ -26,7 +26,7 @@ class UserController implements Controller {
 
       if ($row = $result->fetch_assoc()) {
 
-        $transaction = new Transaction($row['idTransaction'], $row['idUser'], $row['idItem'], $row['merchant'], $row['amount'], $row['date'], $row['category'], $row['notes'], $row['status']);
+        $transaction = new Expense($row['idExpense'], $row['idUser'], $row['idItem'], $row['merchant'], $row['amount'], $row['category'], $row['notes'], $row['date'], $row['status']);
         return $transaction;
       }
       else {
@@ -41,7 +41,7 @@ class UserController implements Controller {
     $db = new MySqlDatabase();
     $mysql = $db->connect();
 
-    $sql = 'INSERT INTO transaction (idTransaction, idUser, idItem, merchant, amount, date, category, notes, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    $sql = 'INSERT INTO expenses (idUser, idItem, merchant, amount, date, category, notes, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
     $stmt = $mysql->prepare($sql);
 
     if (!$stmt) {
@@ -49,7 +49,7 @@ class UserController implements Controller {
     }
     else {
 
-      $stmt->bind_param('sssssssss', $transaction->idTransaction, $transaction->idUser, $transaction->idItem, $transaction->merchant, $transaction->amount, $transaction->date, $transaction->category, $transaction->notes, $transaction->status);
+      $stmt->bind_param('ssssssss', $transaction->idUser, null, $transaction->merchant, $transaction->amount, $transaction->category, $transaction->notes, $transaction->date, $transaction->status);
       $stmt->execute();
 
       return $stmt->errno;
