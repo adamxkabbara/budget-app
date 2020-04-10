@@ -74,10 +74,20 @@ input:focus {
   border: solid 1px var(--primary-color);
 }
 
-input[type="submit"] {
+input[type="submit"], input[type="button"] {
   background-color: var(--primary-color);
   color: var(--primary-background);
   border: none;
+  cursor: pointer;
+}
+
+input[type="button"] {
+  background-color: var(--text-body);
+}
+
+input[type="button"]:hover {
+  background-color: var(--text-heading);
+  transition-duration: 0.3s;
 }
 
 input[type="submit"]:hover,
@@ -85,7 +95,6 @@ input[type="submit"]:hover,
   background-color: var(--primary-dark-color);
   color: var(--primary-background);
   transition-duration: 0.3s;
-  cursor: pointer;
 }
 
 .error {
