@@ -27,6 +27,7 @@
       
             $result = $expense_controller->create($expense_obj);
             echo $result;
+            echo $userId;
             if ($result === SUCCESS) {
               //header("Location: /dashboard?transaction=success");
               exit();
