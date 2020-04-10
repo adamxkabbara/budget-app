@@ -118,6 +118,7 @@
 
     .navbar a:hover, .main-button:hover {
         background-color: var(--primary-color);
+        color: var(--text-body-light);
         transition-duration: 0.3s;
     }
 
