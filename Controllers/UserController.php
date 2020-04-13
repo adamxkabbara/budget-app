@@ -12,7 +12,7 @@ class UserController implements Controller {
     $db = new MySqlDatabase();
     $mysql = $db->connect();
 
-    $sql = 'SELECT * FROM users WHERE uidUsers=? OR emailUsers=?';
+    $sql = 'SELECT * FROM users WHERE uidUser=? OR emailUser=?';
     $stmt = $mysql->prepare($sql);
 
     if (!$stmt) {
@@ -26,7 +26,7 @@ class UserController implements Controller {
 
       if ($row = $result->fetch_assoc()) {
 
-        $user = new User($row['uidUsers'], $row['emailUsers'], $row['pwdUsers']);
+        $user = new User($row['uidUser'], $row['emailUser'], $row['pwdUser']);
         return $user;
       }
       else {
@@ -41,7 +41,7 @@ class UserController implements Controller {
     $db = new MySqlDatabase();
     $mysql = $db->connect();
 
-    $sql = 'INSERT INTO users (uidUsers, emailUsers, pwdUsers) VALUES (?, ?, ?)';
+    $sql = 'INSERT INTO users (uidUser, emailUser, pwdUser) VALUES (?, ?, ?)';
     $stmt = $mysql->prepare($sql);
 
     if (!$stmt) {
