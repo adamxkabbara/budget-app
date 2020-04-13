@@ -2,7 +2,7 @@
     session_start();
 
     if (isset($_POST["transaction-submit"])) {
-/*
+
       // include files
       include_once __DIR__ . '/../../Controllers/ExpenseController.php';
       include_once __DIR__ . '/../../Controllers/RevenueController.php';
@@ -62,7 +62,6 @@
           $revenue_controller = new RevenueController();
     
           $result = $revenue_controller->create($revenue_obj);
-
           if ($result === SUCCESS) {
             header("Location: /dashboard?revenue=success");
             exit();
@@ -81,7 +80,6 @@
         header("Location: /dashboard?error=unknown");
         exit();
       }
-      */
     }
     else {
         header("Location: /signup");
