@@ -3,16 +3,16 @@ ini_set('display_errors', 1);
 
 include_once __DIR__ . '/../Interfaces/Controller.inter.php';
 include_once __DIR__ . '/../Models/MySqlDatabase.class.php';
-include_once __DIR__ . '/../Models/Expense.class.php';
+include_once __DIR__ . '/../Models/Revenue.class.php';
 
-class ExpenseController implements Controller {
+class RevenueController implements Controller {
 
-  function get($idExpense) {
+  function get($idRevenue) {
 
     $db = new MySqlDatabase();
     $mysql = $db->connect();
 
-    $sql = 'SELECT * FROM transaction WHERE idExpense=?';
+    $sql = 'SELECT * FROM transaction WHERE idRevenue=?';
     $stmt = $mysql->prepare($sql);
 
     if (!$stmt) {
@@ -20,14 +20,14 @@ class ExpenseController implements Controller {
     }
     else {
 
-      $stmt->bind_param('s', $idTransaction);
+      $stmt->bind_param('s', $idRevenue);
       $stmt->execute();
       $result = $stmt->get_result();
 
       if ($row = $result->fetch_assoc()) {
 
-        $expense = new Expense($row['idExpense'], $row['idUser'], $row['idItem'], $row['merchant'], $row['amount'], $row['category'], $row['notes'], $row['date'], $row['status']);
-        return $expense;
+        $revenue = new Revenue($row['idRevenue'], $row['idUser'], $row['amount'], $row['date']);
+        return $revenue;
       }
       else {
         return null;
@@ -41,14 +41,14 @@ class ExpenseController implements Controller {
     $db = new MySqlDatabase();
     $mysql = $db->connect();
 
-    $sql = 'INSERT INTO expenses (idUser, merchant, amount, notes, category, date, status) VALUES (?, ?, ?, ?, ?, ?, ?)';
+    $sql = 'INSERT INTO revenues (idUser,amount, date) VALUES (?, ?, ?)';
     $stmt = $mysql->prepare($sql);
 
     if (!$stmt) {
       return 1064;
     }
     else {
-      $stmt->bind_param('sssssss', $transaction->idUser, $transaction->merchant, $transaction->amount, $transaction->notes, $transaction->category, $transaction->date, $transaction->status);
+      $stmt->bind_param('sss', $transaction->idUser, $transaction->amount, $transaction->date);
       $stmt->execute();
 
       return $stmt->errno;
