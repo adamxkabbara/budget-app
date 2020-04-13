@@ -69,12 +69,12 @@ session_start();
                 <div id="category-input">
                     <label for="category">Category </label>
                     <select name="category">
-                        <option value="housing">Housing</option>
-                        <option value="transportation">Transporation</option>
-                        <option value="food">Food & Dining</option>
-                        <option value="medical">Medical</option>
-                        <option value="entertainment">Entertainment</option>
-                        <option value="shopping">Shopping</option>
+                        <option value="Housing">Housing</option>
+                        <option value="Transportation">Transporation</option>
+                        <option value="Food">Food & Dining</option>
+                        <option value="Medical">Medical</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Shopping">Shopping</option>
                     </select>
                 </div>
                 <div id="amount-input">

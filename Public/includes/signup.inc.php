@@ -46,7 +46,7 @@
     else {
       // Check if user already exists
 
-      $user_obj = new User($username, $email, $password);
+      $user_obj = new User(null, $username, $email, $password);
       $user_controller = new UserController();
 
       $result = $user_controller->create($user_obj);

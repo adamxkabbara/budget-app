@@ -34,7 +34,7 @@
         else if ($pwdCheck == true) {
           // found user
           $_SESSION['userUid'] = $user->username;
-
+          $_SESSION['userId'] = $user->id;
           header('Location: /dashboard?login=success');
           exit();
         }

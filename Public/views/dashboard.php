@@ -60,26 +60,32 @@ session_start();
 <body>
     <div class="content">
         <?php
-        require './header.php';
-        ?>
-        <?php
         if (!isset($_SESSION['userUid'])) {
             header("Location: /login");
         }
+        require './header.php';
+        include_once __DIR__ . '/../../Controllers/ExpenseController.php';
+        include_once __DIR__ . '/../../Controllers/RevenueController.php';
+
+        $expense_controller = new ExpenseController();
+        $transactions = $expense_controller->getAll($_SESSION['userId']);
         ?>
         <div class="container">
             <budget-card card header="Quick Summary">
                 <div slot="body">
-                    <budget-item no-border value="30.32">Total Spent Today</budget-item>
-                    <budget-item no-border value="50.32">Total Spent this Month</budget-item>
+                    <budget-item no-border value="<?php echo $expense_controller->sumAmount($_SESSION['userId'], 0);?>">Total Spent Today</budget-item>
+                    <budget-item no-border value="<?php echo $expense_controller->sumAmount($_SESSION['userId'], 1);?>">Total Spent this Month</budget-item>
                 </div>
             </budget-card>
 
             <budget-card href='/transactions' header="Recent Transactions" type='View Transactions'>
                 <div slot="body">
-                    <budget-item date="12/13" category="Category" value="30.21">Transaction</budget-item>
-                    <budget-item date="12/13" category="Category" value="50.22">Transaction</budget-item>
-                    <budget-item no-border date="12/13" category="Category" value="20.88">Transaction</budget-item>
+                    <?php
+                    foreach (array_splice($transactions, 0, 5) as $item) {
+                        $date = date("M d", strtotime($item->date));
+                        echo "<budget-item date=\"{$date}\" category=\"{$item->category}\" value=\"{$item->amount}\">{$item->merchant}</budget-item>";
+                    }
+                    ?>
                 </div>
             </budget-card>
 

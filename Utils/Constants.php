@@ -10,3 +10,6 @@ define('UNAUTHORIZED', 401);
 // MySql error codes
 define('ER_DUP_ENTRY', 1062);
 define('ER_PARSE_ERROR', 1064);
+
+define('TODAY', 0);
+define('MONTH', 1);

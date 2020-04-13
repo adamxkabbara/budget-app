@@ -27,20 +27,17 @@ session_start();
     <div class="content">
         <?php
         require './header.php';
+        include_once __DIR__ . '/../../Controllers/ExpenseController.php';
+        include_once __DIR__ . '/../../Controllers/RevenueController.php';
+
+        $expense_controller = new ExpenseController();
+        $transactions = $expense_controller->getAll($_SESSION['userId']);
+
+        foreach ((array)$transactions as $item) {
+            $date = date("M d", strtotime($item->date));
+            echo "<budget-item date=\"{$date}\" category=\"{$item->category}\" value=\"{$item->amount}\">{$item->merchant}</budget-item>";
+        }
         ?>
-                <?php
-                    $transactions = [
-                        ['date' => '12/13', 'category' => 'category', 'transaction'=> 'Transaction', 'value' => 30.21],
-                        ['date' => '12/13', 'category' => 'category', 'transaction'=> 'Transaction', 'value' => 30.21],
-                        ['date' => '12/13', 'category' => 'category', 'transaction'=> 'Transaction', 'value' => 30.21],
-                        ['date' => '12/13', 'category' => 'category', 'transaction'=> 'Transaction', 'value' => 30.21],
-                        ['date' => '12/13', 'category' => 'category', 'transaction'=> 'Transaction', 'value' => 30.21],
-                        ['date' => '12/13', 'category' => 'category', 'transaction'=> 'Transaction', 'value' => 30.21],
-                    ];
-                    foreach($transactions as $item){
-                        echo "<budget-item date=\"{$item['date']}\" category=\"{$item['category']}\" value=\"{$item['value']}\">{$item['transaction']}</budget-item>";
-                    }
-                ?>
     </div>
     <?php
     require './footer.php';

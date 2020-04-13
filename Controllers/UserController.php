@@ -26,7 +26,7 @@ class UserController implements Controller {
 
       if ($row = $result->fetch_assoc()) {
 
-        $user = new User($row['uidUser'], $row['emailUser'], $row['pwdUser']);
+        $user = new User($row['idUser'], $row['uidUser'], $row['emailUser'], $row['pwdUser']);
         return $user;
       }
       else {
