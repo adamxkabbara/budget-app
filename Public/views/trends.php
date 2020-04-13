@@ -33,6 +33,11 @@ session_start();
     <div class="content">
         <?php
         require './header.php';
+        include_once __DIR__ . '/../../Controllers/ExpenseController.php';
+        include_once __DIR__ . '/../../Controllers/RevenueController.php';
+
+        $expense_controller = new ExpenseController();
+        $chartData = $expense_controller->pieChart($_SESSION['userId']);
         ?>
         <budget-card card header="Spendings vs Earnings">
             <div class="chart" slot="body">
@@ -81,7 +86,7 @@ session_start();
             Chart.defaults.global.legend.labels.usePointStyle = true;
             data = {
                 datasets: [{
-                    data: [10, 20, 30, 100, 99, 20],
+                    data: [<?php echo implode(',', $chartData); ?>],
                     backgroundColor: ['#f29d9d', '#ffd640', '#abe663', '#66e3b7', '#a7e4fa', '#aba1f7'],
                 }, ],
                 labels: [

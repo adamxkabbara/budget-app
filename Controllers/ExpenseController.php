@@ -29,7 +29,7 @@ class ExpenseController implements Controller
         $expenses = [];
 
         foreach ($rows as $row) {
-            $expenses[] = new Expense($row['idTransaction'], $row['idUser'], $row['idItem'], $row['merchant'], $row['amount'], $row['notes'], $row['category'], $row['date'], $row['status']);
+          $expenses[] = new Expense($row['idTransaction'], $row['idUser'], $row['idItem'], $row['merchant'], $row['amount'], $row['notes'], $row['category'], $row['date'], $row['status']);
         }
         return $expenses;
       } else {
@@ -100,7 +100,8 @@ class ExpenseController implements Controller
   {
   }
 
-  function sumAmount($idUser, $type) {
+  function sumAmount($idUser, $type)
+  {
     $db = new MySqlDatabase();
     $mysql = $db->connect();
 
@@ -123,5 +124,28 @@ class ExpenseController implements Controller
     }
     $db->disconnect();
   }
-}
 
+  function pieChart($idUser)
+  {
+    $db = new MySqlDatabase();
+    $mysql = $db->connect();
+
+    $sql = 'SELECT SUM(amount) AS total, category FROM expenses WHERE idUser=? GROUP BY category;';
+    $stmt = $mysql->prepare($sql);
+
+    if (!$stmt) {
+      return null;
+    } else {
+      $stmt->bind_param('s', $idUser);
+      $stmt->execute();
+      $result = $stmt->get_result();
+
+      $chartData = ['Housing' => 0, 'Transportation' => 0, 'Food' => 0, 'Medical' => 0, 'Entertainment' => 0, 'Shopping' => 0];
+      while ($row = $result->fetch_assoc()) {
+        $chartData[$row['category']] = $row['total'];
+      }
+      return array_values($chartData);
+    }
+    $db->disconnect();
+  }
+}

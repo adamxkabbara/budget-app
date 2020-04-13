@@ -69,6 +69,7 @@ session_start();
 
         $expense_controller = new ExpenseController();
         $transactions = $expense_controller->getAll($_SESSION['userId']);
+        $chartData = $expense_controller->pieChart($_SESSION['userId']);
         ?>
         <div class="container">
             <budget-card card header="Quick Summary">
@@ -99,7 +100,7 @@ session_start();
                 Chart.defaults.global.legend.labels.usePointStyle = true;
                 data = {
                     datasets: [{
-                        data: [10, 20, 30, 100, 99, 20],
+                        data: [<?php echo implode(',', $chartData); ?>],
                         backgroundColor: ['#f29d9d', '#ffd640', '#abe663', '#66e3b7', '#a7e4fa', '#aba1f7'],
                     }, ],
                     labels: [
