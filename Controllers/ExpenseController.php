@@ -23,14 +23,15 @@ class ExpenseController implements Controller
       $stmt->bind_param('s', $idUser);
       $stmt->execute();
       $result = $stmt->get_result();
-      $expenses = [];
 
       if ($rows = $result->fetch_assoc()) {
+        $expenses = [];
+        
         foreach ($rows as $row) {
           if ($row) $expenses[] = new Expense($row['idExpense'], $row['idUser'], $row['idItem'], $row['merchant'], $row['amount'], $row['category'], $row['notes'], $row['date'], $row['status']);
         }
         return $expenses;
-        
+
       } else {
         return null;
       }
