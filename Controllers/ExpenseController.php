@@ -129,7 +129,7 @@ class ExpenseController implements Controller
     $db = new MySqlDatabase();
     $mysql = $db->connect();
 
-    $sql = 'SELECT SUM(amount) AS total, category FROM expenses WHERE idUser=? GROUP BY category;';
+    $sql = 'SELECT SUM(amount) AS total, category FROM expenses WHERE idUser=? AND DATE_FORMAT(date, "%Y-%m") = DATE_FORMAT(NOW(), "%Y-%m") GROUP BY category;';
     $stmt = $mysql->prepare($sql);
 
     if (!$stmt) {

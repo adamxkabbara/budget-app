@@ -30,6 +30,7 @@ session_start();
 
     @media screen and (max-device-width: 768px),
     (max-width: 987px) {
+
         #chart-cash-flow,
         #chart-monthly-spending {
             overflow-x: auto;
@@ -54,7 +55,7 @@ session_start();
         $monthly_spending_data = $expense_controller->monthly_spending($_SESSION['userId']);
         $monthly_revenue_data = $expense_controller->monthly_revenue($_SESSION['userId']);
         ?>
-        <budget-card card header="Spendings vs Earnings">
+        <budget-card card header="<?php echo date('F') . ' Spendings vs Earnings'; ?>">
             <div class="chart" slot="body">
                 <canvas id="spending-earned" height=100></canvas>
             </div>
@@ -96,6 +97,7 @@ session_start();
                             ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
                             ctx.textAlign = 'center';
                             ctx.textBaseline = 'bottom';
+                            ctx.fillStyle = '#676968';
 
                             this.data.datasets.forEach(function(dataset, i) {
                                 var meta = chartInstance.controller.getDatasetMeta(i);
@@ -110,7 +112,7 @@ session_start();
             });
         </script>
 
-        <budget-card href='/transactions' type="View Transactions" header="Spending Breakdown">
+        <budget-card href='/transactions' type="View Transactions" header="<?php echo date('F') . ' Spending Breakdown'; ?>">
             <div class="chart" slot="body">
                 <canvas id="spending-breakdown" height=150></canvas>
             </div>
@@ -219,6 +221,31 @@ session_start();
                             },
                         }]
                     },
+                    layout: {
+                        padding: {
+                            top: 25
+                        }
+                    },
+                    "animation": {
+                        "duration": 1,
+                        "onComplete": function() {
+                            var chartInstance = this.chart,
+                                ctx = chartInstance.ctx;
+
+                            ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'bottom';
+                            ctx.fillStyle = '#676968';
+
+                            this.data.datasets.forEach(function(dataset, i) {
+                                var meta = chartInstance.controller.getDatasetMeta(i);
+                                meta.data.forEach(function(bar, index) {
+                                    var data = dataset.data[index];
+                                    if (data != 0) ctx.fillText('$' + data, bar._model.x, bar._model.y - 5);
+                                });
+                            });
+                        }
+                    }
                 }
             });
         </script>

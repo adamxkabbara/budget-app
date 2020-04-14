@@ -75,22 +75,27 @@ session_start();
             <budget-card card header="Quick Summary">
                 <div slot="body">
                     <budget-item no-border value="<?php echo $expense_controller->sumAmount($_SESSION['userId'], 0);?>">Total Spent Today</budget-item>
-                    <budget-item no-border value="<?php echo $expense_controller->sumAmount($_SESSION['userId'], 1);?>">Total Spent this Month</budget-item>
+                    <budget-item no-border value="<?php echo $expense_controller->sumAmount($_SESSION['userId'], 1);?>">Total Spent in <?php echo date('F'); ?></budget-item>
                 </div>
             </budget-card>
 
             <budget-card href='/transactions' header="Recent Transactions" type='View Transactions'>
                 <div slot="body">
                     <?php
-                    foreach (array_splice($transactions, 0, 5) as $item) {
-                        $date = date("M d", strtotime($item->date));
-                        echo "<budget-item date=\"{$date}\" category=\"{$item->category}\" value=\"{$item->amount}\">{$item->merchant}</budget-item>";
+                    if ($transactions) {
+                        foreach (array_splice($transactions, 0, 5) as $item) {
+                            $date = date("M d", strtotime($item->date));
+                            echo "<budget-item date=\"{$date}\" category=\"{$item->category}\" value=\"{$item->amount}\">{$item->merchant}</budget-item>";
+                        }
+                    } else {
+                        echo "<p>No recent transactions</p>";
                     }
+
                     ?>
                 </div>
             </budget-card>
 
-            <budget-card href='/trends' header="Latest Trends" type="View Trends">
+            <budget-card href='/trends' header="Latest <?php echo date('F'); ?> Trends" type="View Trends">
                 <div class="chart" slot="body">
                     <canvas id="spending-breakdown" height=150></canvas>
                 </div>
