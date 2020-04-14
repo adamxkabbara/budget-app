@@ -27,7 +27,6 @@ class ExpenseController implements Controller
 
       if ($rows = $result->fetch_all(MYSQLI_ASSOC)) {
         $expenses = [];
-
         foreach ($rows as $row) {
           $expenses[] = new Expense($row['idTransaction'], $row['idUser'], $row['idItem'], $row['merchant'], $row['amount'], $row['notes'], $row['category'], $row['date'], $row['status']);
         }
@@ -125,7 +124,7 @@ class ExpenseController implements Controller
     $db->disconnect();
   }
 
-  function pieChart($idUser)
+  function spending_breakdown($idUser)
   {
     $db = new MySqlDatabase();
     $mysql = $db->connect();
@@ -143,6 +142,79 @@ class ExpenseController implements Controller
       $chartData = ['Housing' => 0, 'Transportation' => 0, 'Food' => 0, 'Medical' => 0, 'Entertainment' => 0, 'Shopping' => 0];
       while ($row = $result->fetch_assoc()) {
         $chartData[$row['category']] = $row['total'];
+      }
+      return array_values($chartData);
+    }
+    $db->disconnect();
+  }
+
+  function monthly_spending($idUser)
+  {
+    $db = new MySqlDatabase();
+    $mysql = $db->connect();
+
+    $sql = 'SELECT SUM(amount) AS total, MONTH(date) AS month FROM expenses WHERE idUser=? AND YEAR(date) = YEAR(NOW()) GROUP BY MONTH(date);';
+    $stmt = $mysql->prepare($sql);
+
+    if (!$stmt) {
+      return null;
+    } else {
+      $stmt->bind_param('s', $idUser);
+      $stmt->execute();
+      $result = $stmt->get_result();
+
+      $chartData = array_fill(0, date("n"), 0);
+      while ($row = $result->fetch_assoc()) {
+        $chartData[$row['month']-1] = $row['total'];
+      }
+      return array_values($chartData);
+    }
+    $db->disconnect();
+  }
+
+  function spending_earning($idUser)
+  {
+    $db = new MySqlDatabase();
+    $mysql = $db->connect();
+
+    $sql = 'SELECT * from balance WHERE idUser=?;';
+    $stmt = $mysql->prepare($sql);
+
+    if (!$stmt) {
+      return null;
+    } else {
+      $stmt->bind_param('s', $idUser);
+      $stmt->execute();
+      $result = $stmt->get_result();
+
+      $chartData = [0, 0];
+      while ($row = $result->fetch_assoc()) {
+        $chartData[0] = $row['month_spent'];
+        $chartData[1] = $row['month_earned'];
+      }
+      return array_values($chartData);
+    }
+    $db->disconnect();
+  }
+
+  function monthly_revenue($idUser)
+  {
+    $db = new MySqlDatabase();
+    $mysql = $db->connect();
+
+    $sql = 'SELECT SUM(amount) AS total, MONTH(date) AS month FROM revenues WHERE idUser=? AND YEAR(date) = YEAR(NOW()) GROUP BY MONTH(date);';
+    $stmt = $mysql->prepare($sql);
+
+    if (!$stmt) {
+      return null;
+    } else {
+      $stmt->bind_param('s', $idUser);
+      $stmt->execute();
+      $result = $stmt->get_result();
+
+      $chartData = array_fill(0, 12, 0);
+      while ($row = $result->fetch_assoc()) {
+        $chartData[$row['month']-1] = $row['total'];
       }
       return array_values($chartData);
     }

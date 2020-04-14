@@ -23,7 +23,7 @@ budget_card.innerHTML = `
     }
             
    .card a {
-        --border-top: var(--text-outline-light) 1px solid;
+        border-top: var(--text-outline-light) 1px solid;
         color: var(--primary-color);
         background-color: transparent;
         text-align: center;

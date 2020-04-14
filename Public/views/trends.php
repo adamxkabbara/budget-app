@@ -26,6 +26,7 @@ session_start();
 
     .chart {
         margin: 10px;
+        overflow-x: scroll;
     }
 </style>
 
@@ -37,7 +38,10 @@ session_start();
         include_once __DIR__ . '/../../Controllers/RevenueController.php';
 
         $expense_controller = new ExpenseController();
-        $chartData = $expense_controller->pieChart($_SESSION['userId']);
+        $spending_earning = $expense_controller->spending_earning($_SESSION['userId']);
+        $spending_breakdown = $expense_controller->spending_breakdown($_SESSION['userId']);
+        $monthly_spending_data = $expense_controller->monthly_spending($_SESSION['userId']);
+        $monthly_revenue_data = $expense_controller->monthly_revenue($_SESSION['userId']);
         ?>
         <budget-card card header="Spendings vs Earnings">
             <div class="chart" slot="body">
@@ -52,7 +56,7 @@ session_start();
                 data: {
                     labels: ['Spent', 'Earned'],
                     datasets: [{
-                        data: [89, 200],
+                        data: [<?php echo implode(',', $spending_earning); ?>],
                         backgroundColor: ['#ffd640', '#abe663'],
                     }, ]
                 },
@@ -71,6 +75,25 @@ session_start();
                                 beginAtZero: true
                             }
                         }]
+                    },
+                    "animation": {
+                        "duration": 1,
+                        "onComplete": function() {
+                            var chartInstance = this.chart,
+                                ctx = chartInstance.ctx;
+
+                            ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'bottom';
+
+                            this.data.datasets.forEach(function(dataset, i) {
+                                var meta = chartInstance.controller.getDatasetMeta(i);
+                                meta.data.forEach(function(bar, index) {
+                                    var data = dataset.data[index];
+                                    ctx.fillText('$' + data, bar._model.x + 20, bar._model.y + 5);
+                                });
+                            });
+                        }
                     }
                 }
             });
@@ -86,7 +109,7 @@ session_start();
             Chart.defaults.global.legend.labels.usePointStyle = true;
             data = {
                 datasets: [{
-                    data: [<?php echo implode(',', $chartData); ?>],
+                    data: [<?php echo implode(',', $spending_breakdown); ?>],
                     backgroundColor: ['#f29d9d', '#ffd640', '#abe663', '#66e3b7', '#a7e4fa', '#aba1f7'],
                 }, ],
                 labels: [
@@ -126,7 +149,7 @@ session_start();
                     labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
                     datasets: [{
                         backgroundColor: 'rgba(0, 186, 219, 0.36)',
-                        data: [120, 100, 120, 200, 300, 120, 200],
+                        data: [<?php echo implode(',', $monthly_spending_data); ?>],
                     }]
                 },
                 options: {
@@ -140,11 +163,47 @@ session_start();
                             gridLines: {
                                 display: false
                             },
-                            ticks: {
-                                beginAtZero: true
-                            }
                         }]
                     }
+                }
+            });
+        </script>
+
+        <budget-card card header="Cash Flow">
+            <div class="chart" slot="body">
+                <canvas id="cash-flow" height=200 width=10000></canvas>
+            </div>
+        </budget-card>
+
+        <script>
+            var ctx = document.getElementById('cash-flow').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'Spent',
+                        data: [<?php echo implode(',', $monthly_spending_data); ?>],
+                        backgroundColor: '#66e3b7',
+                    }, {
+                        label: 'Earned',
+                        data: [<?php echo implode(',', $monthly_revenue_data); ?>],
+                        backgroundColor: '#aba1f7',
+                    }, ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    legend: {
+                        position: 'bottom'
+                    },
+                    scales: {
+                        yAxes: [{
+                            gridLines: {
+                                display: false
+                            },
+                        }]
+                    },
                 }
             });
         </script>

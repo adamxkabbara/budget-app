@@ -69,7 +69,7 @@ session_start();
 
         $expense_controller = new ExpenseController();
         $transactions = $expense_controller->getAll($_SESSION['userId']);
-        $chartData = $expense_controller->pieChart($_SESSION['userId']);
+        $chartData = $expense_controller->spending_breakdown($_SESSION['userId']);
         ?>
         <div class="container">
             <budget-card card header="Quick Summary">
