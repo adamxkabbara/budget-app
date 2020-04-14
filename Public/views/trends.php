@@ -26,7 +26,18 @@ session_start();
 
     .chart {
         margin: 10px;
-        overflow-x: scroll;
+    }
+
+    @media screen and (max-device-width: 768px),
+    (max-width: 987px) {
+        #chart-cash-flow,
+        #chart-monthly-spending {
+            overflow-x: auto;
+        }
+
+        .scrollable {
+            min-width: 600px;
+        }
     }
 </style>
 
@@ -137,8 +148,10 @@ session_start();
         </script>
 
         <budget-card card header="Monthly Spending Trend">
-            <div class="chart" slot="body">
-                <canvas id="spending-trend"></canvas>
+            <div class="chart" id="chart-monthly-spending" slot="body">
+                <div class="scrollable">
+                    <canvas id="spending-trend"></canvas>
+                </div>
             </div>
         </budget-card>
         <script>
@@ -170,8 +183,10 @@ session_start();
         </script>
 
         <budget-card card header="Cash Flow">
-            <div class="chart" slot="body">
-                <canvas id="cash-flow" height=200 width=10000></canvas>
+            <div class="chart" id="chart-cash-flow" slot="body">
+                <div class="scrollable">
+                    <canvas id="cash-flow" height=200></canvas>
+                </div>
             </div>
         </budget-card>
 

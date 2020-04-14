@@ -105,7 +105,7 @@ class ExpenseController implements Controller
     $mysql = $db->connect();
 
     $subquery = $type == TODAY ? 'DATE(date) = CURDATE()' : 'DATE_FORMAT(date, "%Y-%m") = DATE_FORMAT(NOW(), "%Y-%m")';
-    $sql = 'SELECT SUM(amount) AS total FROM expenses WHERE ' . $subquery . ' AND idUser=?;';
+    $sql = 'SELECT IFNULL(SUM(amount),0) AS total FROM expenses WHERE ' . $subquery . ' AND idUser=?;';
     $stmt = $mysql->prepare($sql);
 
     if (!$stmt) {
