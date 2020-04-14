@@ -1,0 +1,26 @@
+.graph-title {
+    text-align: left;
+    margin: 1.2rem 0 1rem .5rem;
+    font-size: 18px;
+}
+
+budget-card {
+    margin: 10px;
+}
+
+.chart {
+    margin: 10px;
+}
+
+@media screen and (max-device-width: 768px),
+(max-width: 987px) {
+
+    #chart-cash-flow,
+    #chart-monthly-spending {
+        overflow-x: auto;
+    }
+
+    .scrollable {
+        min-width: 600px;
+    }
+}

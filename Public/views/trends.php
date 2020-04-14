@@ -1,5 +1,14 @@
 <?php
 session_start();
+
+include_once __DIR__ . '/../../Controllers/ExpenseController.php';
+include_once __DIR__ . '/../../Controllers/RevenueController.php';
+
+$expense_controller = new ExpenseController();
+$spending_earning = $expense_controller->spending_earning($_SESSION['userId']);
+$spending_breakdown = $expense_controller->spending_breakdown($_SESSION['userId']);
+$monthly_spending_data = $expense_controller->monthly_spending($_SESSION['userId']);
+$monthly_revenue_data = $expense_controller->monthly_revenue($_SESSION['userId']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,48 +21,13 @@ session_start();
     <link rel="icon" href="data:,">
     <script src="../web-components/budget-card.js"></script>
     <link type="text/css" rel="stylesheet" href="../styles/styles.css">
+    <link type="text/css" rel="stylesheet" href="../styles/trends.css">
 </head>
-<style>
-    .graph-title {
-        text-align: left;
-        margin: 1.2rem 0 1rem .5rem;
-        font-size: 18px;
-    }
-
-    budget-card {
-        margin: 10px;
-    }
-
-    .chart {
-        margin: 10px;
-    }
-
-    @media screen and (max-device-width: 768px),
-    (max-width: 987px) {
-
-        #chart-cash-flow,
-        #chart-monthly-spending {
-            overflow-x: auto;
-        }
-
-        .scrollable {
-            min-width: 600px;
-        }
-    }
-</style>
 
 <body>
     <div class="content">
         <?php
         require './header.php';
-        include_once __DIR__ . '/../../Controllers/ExpenseController.php';
-        include_once __DIR__ . '/../../Controllers/RevenueController.php';
-
-        $expense_controller = new ExpenseController();
-        $spending_earning = $expense_controller->spending_earning($_SESSION['userId']);
-        $spending_breakdown = $expense_controller->spending_breakdown($_SESSION['userId']);
-        $monthly_spending_data = $expense_controller->monthly_spending($_SESSION['userId']);
-        $monthly_revenue_data = $expense_controller->monthly_revenue($_SESSION['userId']);
         ?>
         <budget-card card header="<?php echo date('F') . ' Spendings vs Earnings'; ?>">
             <div class="chart" slot="body">
