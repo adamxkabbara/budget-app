@@ -98,6 +98,10 @@ $chartData = $expense_controller->spending_breakdown($_SESSION['userId']);
         <fab-item href="/new-transaction?type=1">Revenue</fab-item>
         <fab-item href="/new-transaction?type=0">Expense</fab-item>
     </fab-button>
+
+    <?php
+    require './footer.php';
+    ?>
 </body>
 
 </html>

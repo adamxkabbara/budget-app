@@ -23,7 +23,24 @@ $monthly_revenue_data = $expense_controller->monthly_revenue($_SESSION['userId']
     <link type="text/css" rel="stylesheet" href="../styles/styles.css">
     <link type="text/css" rel="stylesheet" href="../styles/trends.css">
 </head>
+<!--
+</head>
+<style>
+    .graph-title {
+        text-align: left;
+        margin: 1.2rem 0 1rem .5rem;
+        font-size: 18px;
+    }
 
+    budget-card {
+        margin: 10px;
+    }
+
+    .chart {
+        margin: 10px;
+    }
+</style>
+-->
 <body>
     <div class="content">
         <?php
