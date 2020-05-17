@@ -95,6 +95,7 @@ input[type="submit"]:hover,
   background-color: var(--primary-dark-color);
   color: var(--primary-background);
   transition-duration: 0.3s;
+  cursor: pointer;
 }
 
 .error {

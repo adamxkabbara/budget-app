@@ -24,7 +24,7 @@
         }
         else {
       
-          $userId = $_SESSION['userUid'];
+          $userId = $_SESSION['userId'];
           $date = date('Y-m-d H:i:s');
           $expense_obj = new Expense(null, $userId, null, $merchant, $amount, $notes, $category, $date, null);
           $expense_controller = new ExpenseController();
@@ -56,7 +56,7 @@
         }
         else {
       
-          $userId = $_SESSION['userUid'];
+          $userId = $_SESSION['userId'];
           $date = date('Y-m-d H:i:s');
           $revenue_obj = new Revenue(null, $userId, $amount, $date);
           $revenue_controller = new RevenueController();

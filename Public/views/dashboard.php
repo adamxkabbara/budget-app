@@ -1,5 +1,15 @@
 <?php
 session_start();
+
+if (!isset($_SESSION['userUid'])) {
+    header("Location: /login");
+}
+include_once __DIR__ . '/../../Controllers/ExpenseController.php';
+include_once __DIR__ . '/../../Controllers/RevenueController.php';
+
+$expense_controller = new ExpenseController();
+$transactions = $expense_controller->getAll($_SESSION['userId']);
+$chartData = $expense_controller->spending_breakdown($_SESSION['userId']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,50 +21,11 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="data:,">
     <link type="text/css" rel="stylesheet" href="../styles/styles.css">
+    <link type="text/css" rel="stylesheet" href="../styles/dashboard.css">
     <script src="../web-components/budget-card.js"></script>
     <script src="../web-components/budget-item.js"></script>
     <script src="../web-components/budgetDrawer.js"></script>
-    <style>
-        fab-button {
-            position: fixed;
-            right: 20px;
-            bottom: 20px;
-            box-shadow: 0 5px 11px 4px rgba(0, 0, 0, 0.18), 0 4px 12px -7px rgba(0, 0, 0, 0.15);
-            border-radius: 50%;
-        }
-
-        fab-button:hover {
-            transition-duration: 0.3s;
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px 9px rgba(0, 0, 0, 0.18), 0 4px 17px 0px rgba(0, 0, 0, 0.15);
-        }
-
-        fab-item {
-            box-shadow: 0 3px 10px 0px rgba(0, 0, 0, 0.18), 0 3px 20px 0px rgba(0, 0, 0, 0.15);
-            transition-duration: .3s;
-            background-color: #5fca97;
-            border-radius: 10px;
-            margin: 10px 0;
-        }
-
-        fab-item:hover {
-            background-color: #76dea5;
-        }
-
-        budget-card {
-            margin: 0px 25px;
-            max-width: 900px;
-        }
-
-        ul {
-            padding: 0px;
-        }
-
-        .chart {
-            margin: 10px;
-        }
-    </style>
-    <title>dashboard</title>
+    <title>Dashboard</title>
 </head>
 
 <body>
@@ -62,28 +33,30 @@ session_start();
         <?php
         require './header.php';
         ?>
-        <?php
-        if (!isset($_SESSION['userUid'])) {
-            header("Location: /login");
-        }
-        ?>
         <div class="container">
             <budget-card card header="Quick Summary">
                 <div slot="body">
-                    <budget-item no-border value="30.32">Total Spent Today</budget-item>
-                    <budget-item no-border value="50.32">Total Spent this Month</budget-item>
+                    <budget-item no-border value="<?php echo $expense_controller->sumAmount($_SESSION['userId'], 0); ?>">Total Spent Today</budget-item>
+                    <budget-item no-border value="<?php echo $expense_controller->sumAmount($_SESSION['userId'], 1); ?>">Total Spent in <?php echo date('F'); ?></budget-item>
                 </div>
             </budget-card>
 
             <budget-card href='/transactions' header="Recent Transactions" type='View Transactions'>
                 <div slot="body">
-                    <budget-item date="12/13" category="Category" value="30.21">Transaction</budget-item>
-                    <budget-item date="12/13" category="Category" value="50.22">Transaction</budget-item>
-                    <budget-item no-border date="12/13" category="Category" value="20.88">Transaction</budget-item>
+                    <?php
+                    if ($transactions) {
+                        foreach (array_splice($transactions, 0, 5) as $item) {
+                            $date = date("M d", strtotime($item->date));
+                            echo "<budget-item date=\"{$date}\" category=\"{$item->category}\" value=\"{$item->amount}\">{$item->merchant}</budget-item>";
+                        }
+                    } else {
+                        echo "<p>No recent transactions</p>";
+                    }
+                    ?>
                 </div>
             </budget-card>
 
-            <budget-card href='/trends' header="Latest Trends" type="View Trends">
+            <budget-card href='/trends' header="Latest <?php echo date('F'); ?> Trends" type="View Trends">
                 <div class="chart" slot="body">
                     <canvas id="spending-breakdown" height=150></canvas>
                 </div>
@@ -93,7 +66,7 @@ session_start();
                 Chart.defaults.global.legend.labels.usePointStyle = true;
                 data = {
                     datasets: [{
-                        data: [10, 20, 30, 100, 99, 20],
+                        data: [<?php echo implode(',', $chartData); ?>],
                         backgroundColor: ['#f29d9d', '#ffd640', '#abe663', '#66e3b7', '#a7e4fa', '#aba1f7'],
                     }, ],
                     labels: [
@@ -125,6 +98,10 @@ session_start();
         <fab-item href="/new-transaction?type=1">Revenue</fab-item>
         <fab-item href="/new-transaction?type=0">Expense</fab-item>
     </fab-button>
+
+    <?php
+    require './footer.php';
+    ?>
 </body>
 
 </html>
