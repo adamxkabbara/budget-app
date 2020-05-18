@@ -4,6 +4,7 @@ ini_set('display_errors', 1);
 include_once __DIR__ . '/../Interfaces/Controller.inter.php';
 include_once __DIR__ . '/../Models/MySqlDatabase.class.php';
 include_once __DIR__ . '/../Models/Revenue.class.php';
+include_once __DIR__ . '/../Utils/Constants.php';
 
 class RevenueController implements Controller {
 
@@ -62,4 +63,29 @@ class RevenueController implements Controller {
   function update() {}
 
   function delete_all() {}
+
+  function sumAmount($idUser, $type)
+  {
+    $db = new MySqlDatabase();
+    $mysql = $db->connect();
+
+    $subquery = $type == TODAY ? 'DATE(date) = CURDATE()' : 'DATE_FORMAT(date, "%Y-%m") = DATE_FORMAT(NOW(), "%Y-%m")';
+    $sql = 'SELECT IFNULL(SUM(amount),0) AS total FROM revenues WHERE ' . $subquery . ' AND idUser=?;';
+    $stmt = $mysql->prepare($sql);
+
+    if (!$stmt) {
+      return null;
+    } else {
+      $stmt->bind_param('s', $idUser);
+      $stmt->execute();
+      $result = $stmt->get_result();
+
+      if ($row = $result->fetch_assoc()) {
+        return $row['total'];
+      } else {
+        return 0;
+      }
+    }
+    $db->disconnect();
+  }
 }

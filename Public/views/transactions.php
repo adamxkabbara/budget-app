@@ -33,10 +33,15 @@ session_start();
         $expense_controller = new ExpenseController();
         $transactions = $expense_controller->getAll($_SESSION['userId']);
 
-        foreach ((array)$transactions as $item) {
-            $date = date("M d", strtotime($item->date));
-            echo "<budget-item date=\"{$date}\" category=\"{$item->category}\" value=\"{$item->amount}\">{$item->merchant}</budget-item>";
+        if (empty($transactions)) {
+            echo "<p>No recent transactions</p>";
+        } else {
+            foreach ((array) $transactions as $item) {
+                $date = date("M d", strtotime($item->date));
+                echo "<budget-item date=\"{$date}\" category=\"{$item->category}\" value=\"{$item->amount}\">{$item->merchant}</budget-item>";
+            }
         }
+
         ?>
     </div>
     <?php

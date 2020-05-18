@@ -35,6 +35,12 @@ budget_item.innerHTML = `
     .value {
         color: var(--primary-dark-color);
     }
+    .expense {
+        color: var(--highlight-color);
+    }
+    .revenue {
+        color: var(--primary-dark-color);
+    }
     
 </style>
 <li>
@@ -84,13 +90,21 @@ customElements.define('budget-item',
                     this.shadowDOM.querySelector('.date').innerText = newValue;
                     break;
                 case 'no-border':
-                    console.log('hello')
                     this.shadowDOM.querySelector('li').classList.add('no-border');
                     break;
+                case 'type':
+                    console.log(newValue)
+                    if (newValue == 0) {
+                        console.log("yes")
+                        this.shadowDOM.querySelector('.value').classList.add('revenue');
+                    } else {
+                        this.shadowDOM.querySelector('.value').classList.add('expense');
+                    }
+                    
             }
         }
         static get observedAttributes() {
-            return ['item-name', 'no-border', 'date', 'category', 'value'];
+            return ['item-name', 'no-border', 'date', 'category', 'value', 'type'];
         }
     }
 );

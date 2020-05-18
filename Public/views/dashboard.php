@@ -8,6 +8,7 @@ include_once __DIR__ . '/../../Controllers/ExpenseController.php';
 include_once __DIR__ . '/../../Controllers/RevenueController.php';
 
 $expense_controller = new ExpenseController();
+$revenue_controller = new RevenueController();
 $transactions = $expense_controller->getAll($_SESSION['userId']);
 $chartData = $expense_controller->spending_breakdown($_SESSION['userId']);
 ?>
@@ -36,8 +37,10 @@ $chartData = $expense_controller->spending_breakdown($_SESSION['userId']);
         <div class="container">
             <budget-card card header="Quick Summary">
                 <div slot="body">
-                    <budget-item no-border value="<?php echo $expense_controller->sumAmount($_SESSION['userId'], 0); ?>">Total Spent Today</budget-item>
-                    <budget-item no-border value="<?php echo $expense_controller->sumAmount($_SESSION['userId'], 1); ?>">Total Spent in <?php echo date('F'); ?></budget-item>
+                    <budget-item no-border type="0" class="revenue-summary" value="<?php echo $revenue_controller->sumAmount($_SESSION['userId'], 0); ?>">Earned Today</budget-item>
+                    <budget-item type="1" value="<?php echo $expense_controller->sumAmount($_SESSION['userId'], 0); ?>">Spent Today</budget-item>
+                    <budget-item no-border type="0" class="revenue-summary" value="<?php echo $revenue_controller->sumAmount($_SESSION['userId'], 1); ?>"><?php echo date('F'); ?> Earnings</budget-item>
+                    <budget-item no-border type="1" value="<?php echo $expense_controller->sumAmount($_SESSION['userId'], 1); ?>"><?php echo date('F'); ?> Spendings </budget-item>
                 </div>
             </budget-card>
 
@@ -47,7 +50,7 @@ $chartData = $expense_controller->spending_breakdown($_SESSION['userId']);
                     if ($transactions) {
                         foreach (array_splice($transactions, 0, 5) as $item) {
                             $date = date("M d", strtotime($item->date));
-                            echo "<budget-item date=\"{$date}\" category=\"{$item->category}\" value=\"{$item->amount}\">{$item->merchant}</budget-item>";
+                            echo "<budget-item type=\"1\" date=\"{$date}\" category=\"{$item->category}\" value=\"{$item->amount}\">{$item->merchant}</budget-item>";
                         }
                     } else {
                         echo "<p>No recent transactions</p>";
@@ -58,7 +61,13 @@ $chartData = $expense_controller->spending_breakdown($_SESSION['userId']);
 
             <budget-card href='/trends' header="Latest <?php echo date('F'); ?> Trends" type="View Trends">
                 <div class="chart" slot="body">
-                    <canvas id="spending-breakdown" height=150></canvas>
+                    <?php
+                    if (empty($chartData)) {
+                        echo '<canvas id="spending-breakdown" height=150></canvas>';
+                    } else {
+                        echo "<p>No recent transactions</p>";
+                    }
+                    ?>
                 </div>
             </budget-card>
 
