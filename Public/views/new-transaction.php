@@ -82,7 +82,7 @@ session_start();
                     <input type="number" name="amount" step=".01">
                 </div>
                 <div id="notes-input">
-                    <label for="notes">Notes</label>
+                    <label for="notes">Notes (optional)</label>
                     <textarea name="notes"></textarea>
                 </div>
 
