@@ -17,9 +17,9 @@
         $notes = $_POST["notes"];
 
         // User input check
-        if (empty($merchant) || empty($category) || empty($amount) || empty($notes)) {
+        if (empty($merchant) || empty($category) || empty($amount)) {
 
-            header("Location: /signup?error=emptyfields&uid=$username&mail=$email");
+            header("Location: /dashboard");
             exit();
         }
         else {
@@ -51,7 +51,7 @@
         // User input check
         if (empty($amount)) {
 
-            header("Location: /signup?error=emptyfields&uid=$username&mail=$email");
+            header("Location: /new-transaction?error=emptyAmount");
             exit();
         }
         else {
