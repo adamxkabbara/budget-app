@@ -10,59 +10,9 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="data:,">
     <link type="text/css" rel="stylesheet" href="../styles/styles.css">
+    <link type="text/css" rel="stylesheet" href="../styles/profile.css">
     <script src="../web-components/budget-card.js"></script>
 </head>
-<style>
-    budget-card {
-        margin: 0 25px;
-    }
-
-    ul {
-        padding: 0;
-    }
-
-    .list {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .category {
-        text-align: left;
-        padding: 10px;
-        color: var(--secondary-color);
-    }
-
-    .value {
-        text-align: right;
-        padding: 10px;
-        color: var(--primary-dark-color);
-    }
-
-    #save,
-    #edit, #cancel {
-        background-color: var(--primary-color);
-        padding: 8px 45px;
-        border-radius: 5px;
-        margin: 10px;
-        display: inline;
-    }
-
-    #cancel {
-        background-color: var(--text-body);
-    }
-
-    input {
-        border: none;
-    }
-
-    *:focus {
-        outline: none;
-    }
-
-    .hidden {
-        display: none;
-    }
-</style>
 
 <body>
     <div class="content">
@@ -76,11 +26,29 @@ session_start();
         ?>
         <budget-card card header="<span class='heading'>My Profile </span>">
             <div slot="body">
+                <?php
+                $errorMapping = [
+                    'userTaken' => 'User is taken!',
+                    'invalidsql' => 'Oops! An error occured!',
+                    'invaliduid' => 'Invalid username!',
+                    'invalimail' => 'Invalid email!',
+                    'invalimailuid' => 'Invalid email!',
+                    'emptyfields' => 'Some fields were left empty!',
+                    'passwordmalformed' => 'Password needs 1 uppercase, 1 lowercase, and 1 digit!',
+                    'passwordcheck' => 'Passwords don\'t match!',
+                    '' => ''
+                ];
+                if (isset($_GET['error'])) {
+                    $errorMapping[$_GET['error']];
+
+                    echo '<p class="error">' . $errorMapping[$_GET["error"]] . '</p>';
+                }
+                ?>
                 <form action="../includes/profile.inc.php" method="post">
                     <div class="list"><span class="category">Username:</span><input class="value" type="text" name="username" value="<?php echo $user->username; ?>" readonly></div>
                     <div class="list"><span class="category">Email:</span><input class="value" type="email" name="email" value="<?php echo $user->email; ?>" readonly></div>
-                    <div class="list"><span class="category">Password:</span><input class="value" type="password" name="password" value="&#9679;&#9679;&#9679;&#9679;&#9679;" readonly></div>
-                    <div class="list hidden" id="repeat-password"><span class="category">Confirm Password:</span><input class="value" type="password" name="password-repeat" value="&#9679;&#9679;&#9679;&#9679;&#9679;" readonly></div>
+                    <div class="list"><span class="category">Password:</span><input class="value" type="password" name="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" readonly></div>
+                    <div class="list hidden" id="repeat-password"><span class="category">Confirm Password:</span><input class="value" type="password" name="password-repeat" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" readonly></div>
                     <input type="hidden" id="cancel" value="Cancel"> </input>
                     <input type="hidden" id="save" value="Save" name="profile-submit"> </input>
                     <input type="button" id="edit" value="Edit"> </input>
@@ -105,6 +73,10 @@ session_start();
                 document.getElementById('save').type = 'hidden';
                 document.getElementById('cancel').type = 'hidden';
                 document.querySelector('#repeat-password').classList.add('hidden');
+                
+                var inputs = document.querySelectorAll('input.value');
+                inputs[0].value = "<?php echo $user->username; ?>";
+                inputs[1].value = "<?php echo $user->email; ?>";
             })
         </script>
     </div>

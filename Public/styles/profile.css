@@ -1,0 +1,50 @@
+budget-card {
+    margin: 0 25px;
+}
+
+ul {
+    padding: 0;
+}
+
+.list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.category {
+    text-align: left;
+    padding: 10px;
+    color: var(--secondary-color);
+}
+
+.value {
+    text-align: right;
+    padding: 10px;
+    color: var(--primary-dark-color);
+}
+
+#save,
+#edit,
+#cancel {
+    background-color: var(--primary-color);
+    padding: 8px 45px;
+    border-radius: 5px;
+    margin: 10px;
+    display: inline;
+}
+
+#cancel {
+    background-color: var(--text-body);
+}
+
+input {
+    border: none;
+}
+
+*:focus {
+    outline: none;
+}
+
+.hidden {
+    display: none;
+}

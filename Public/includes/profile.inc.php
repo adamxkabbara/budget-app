@@ -43,7 +43,6 @@ if (isset($_POST['profile-submit'])) {
     }
     else {
       // Check if user already exists
-
       $user_obj = new User(null, $username, $email, $password);
       $user_controller = new UserController();
 
