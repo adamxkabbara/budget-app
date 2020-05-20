@@ -89,7 +89,7 @@ $monthly_revenue_data = $expense_controller->monthly_revenue($_SESSION['userId']
         <budget-card href='/transactions' type="View Transactions" header="<?php echo date('F') . ' Spending Breakdown'; ?>">
             <div class="chart" slot="body">
                 <?php
-                if (empty($spending_breakdown)) {
+                if (!empty($spending_breakdown)) {
                     echo '<canvas id="spending-breakdown" height=150></canvas>';
                 } else {
                     echo "<p>No recent transactions</p>";

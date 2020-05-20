@@ -62,7 +62,7 @@ $chartData = $expense_controller->spending_breakdown($_SESSION['userId']);
             <budget-card href='/trends' header="Latest <?php echo date('F'); ?> Trends" type="View Trends">
                 <div class="chart" slot="body">
                     <?php
-                    if (empty($chartData)) {
+                    if (!empty($chartData)) {
                         echo '<canvas id="spending-breakdown" height=150></canvas>';
                     } else {
                         echo "<p>No recent transactions</p>";
