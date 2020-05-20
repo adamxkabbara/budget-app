@@ -8,7 +8,7 @@
     // User logged in
     echo '<ul class="menu">
           <label id="close">&#10006;</label>
-          <a class="nav-link" href="/dashboard"><img src=\'../media/profile.svg\' width=30 height=35/>Profile</a>
+          <a class="nav-link" href="/profile"><img src=\'../media/profile.svg\' width=30 height=35/>Profile</a>
           <a class="nav-link" href="/dashboard"><img src=\'../media/dashboard.svg\' width=30 height=35/>Dashboard</a>
           <a class="nav-link" href="/transactions"><img src=\'../media/transactions.svg\' width=30 height=35/>Transactions</a>
           <a class="nav-link" href="/trends"><img src=\'../media/trend.svg\' width=30 height=35/>Trends</a>
