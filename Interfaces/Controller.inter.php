@@ -5,7 +5,7 @@
     function get($id); 
     function create($obj);
     function delete();
-    function update();
+    function update($obj, $uid);
     function delete_all();
     
   }

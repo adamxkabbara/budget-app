@@ -55,6 +55,10 @@ session_start();
         border: none;
     }
 
+    *:focus {
+        outline: none;
+    }
+
     .hidden {
         display: none;
     }
@@ -72,12 +76,13 @@ session_start();
         ?>
         <budget-card card header="<span class='heading'>My Profile </span>">
             <div slot="body">
-                <form>
-                    <div class="list"><span class="category">Username:</span><input class="value" type="text" value="<?php echo $user->username; ?>" readonly></div>
-                    <div class="list"><span class="category">Email:</span><input class="value" type="email" value="<?php echo $user->email; ?>" readonly></div>
-                    <div class="list"><span class="category">Password:</span><input class="value" type="password" value="&#9679;&#9679;&#9679;&#9679;&#9679;" readonly></div>
+                <form action="../includes/profile.inc.php" method="post">
+                    <div class="list"><span class="category">Username:</span><input class="value" type="text" name="username" value="<?php echo $user->username; ?>" readonly></div>
+                    <div class="list"><span class="category">Email:</span><input class="value" type="email" name="email" value="<?php echo $user->email; ?>" readonly></div>
+                    <div class="list"><span class="category">Password:</span><input class="value" type="password" name="password" value="&#9679;&#9679;&#9679;&#9679;&#9679;" readonly></div>
+                    <div class="list hidden" id="repeat-password"><span class="category">Confirm Password:</span><input class="value" type="password" name="password-repeat" value="&#9679;&#9679;&#9679;&#9679;&#9679;" readonly></div>
                     <input type="hidden" id="cancel" value="Cancel"> </input>
-                    <input type="hidden" id="save" value="Save"> </input>
+                    <input type="hidden" id="save" value="Save" name="profile-submit"> </input>
                     <input type="button" id="edit" value="Edit"> </input>
                 </form>
             </div>
@@ -92,12 +97,14 @@ session_start();
                 var inputs = document.querySelectorAll('input.value');
                 inputs.forEach(input => input.readOnly = false);
                 inputs[0].focus();
+                document.querySelector('#repeat-password').classList.remove('hidden');
             })
 
             document.querySelector('#cancel').addEventListener('click', function() {
                 document.getElementById('edit').type = 'button';
                 document.getElementById('save').type = 'hidden';
                 document.getElementById('cancel').type = 'hidden';
+                document.querySelector('#repeat-password').classList.add('hidden');
             })
         </script>
     </div>

@@ -91,7 +91,7 @@ class ExpenseController implements Controller
   {
   }
 
-  function update()
+  function update($obj, $uid)
   {
   }
 

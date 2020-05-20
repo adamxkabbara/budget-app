@@ -60,7 +60,26 @@ class UserController implements Controller {
 
   function delete() {}
 
-  function update() {}
+  function update($user, $uidUser) {
+    $db = new MySqlDatabase();
+    $mysql = $db->connect();
+
+    $sql = 'UPDATE users SET uidUser=?, emailUser=?, pwdUser=? WHERE uidUser=?';
+    $stmt = $mysql->prepare($sql);
+
+    if (!$stmt) {
+      return 1064;
+    }
+    else {
+      $hashPassword = password_hash($user->password, PASSWORD_DEFAULT);
+      $stmt->bind_param('ssss', $user->username, $user->email, $hashPassword, $uidUser);
+      $stmt->execute();
+
+      return $stmt->errno;
+    }
+
+    $db->disconnect();
+  }
 
   function delete_all() {}
 }

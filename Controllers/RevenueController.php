@@ -60,7 +60,7 @@ class RevenueController implements Controller {
 
   function delete() {}
 
-  function update() {}
+  function update($obj, $uid) {}
 
   function delete_all() {}
 
