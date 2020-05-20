@@ -14,7 +14,7 @@ class ExpenseController implements Controller
     $db = new MySqlDatabase();
     $mysql = $db->connect();
 
-    $sql = 'SELECT * FROM expenses WHERE idUser=?';
+    $sql = 'SELECT * FROM expenses WHERE idUser=? ORDER BY date DESC';
     $stmt = $mysql->prepare($sql);
 
     if (!$stmt) {
