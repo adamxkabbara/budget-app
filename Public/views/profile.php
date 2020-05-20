@@ -11,7 +11,6 @@ session_start();
     <link rel="icon" href="data:,">
     <link type="text/css" rel="stylesheet" href="../styles/styles.css">
     <script src="../web-components/budget-card.js"></script>
-    <script src="../web-components/budget-item.js"></script>
 </head>
 <style>
     budget-card {
@@ -38,6 +37,27 @@ session_start();
         padding: 10px;
         color: var(--primary-dark-color);
     }
+
+    #save,
+    #edit, #cancel {
+        background-color: var(--primary-color);
+        padding: 8px 45px;
+        border-radius: 5px;
+        margin: 10px;
+        display: inline;
+    }
+
+    #cancel {
+        background-color: var(--text-body);
+    }
+
+    input {
+        border: none;
+    }
+
+    .hidden {
+        display: none;
+    }
 </style>
 
 <body>
@@ -50,13 +70,36 @@ session_start();
         $user_controller = new UserController();
         $user = $user_controller->get($uid);
         ?>
-        <budget-card card header="My Profile">
+        <budget-card card header="<span class='heading'>My Profile </span>">
             <div slot="body">
-                <div class="list"><span class="category">Username:</span><span class="value"><?php echo $user->username; ?></span></div>
-                <div class="list"><span class="category">Email:</span><span class="value"><?php echo $user->email; ?></span></div>
-                <div class="list"><span class="category">Password:</span><span class="value">&#9679;&#9679;&#9679;&#9679;&#9679;</span></div>
+                <form>
+                    <div class="list"><span class="category">Username:</span><input class="value" type="text" value="<?php echo $user->username; ?>" readonly></div>
+                    <div class="list"><span class="category">Email:</span><input class="value" type="email" value="<?php echo $user->email; ?>" readonly></div>
+                    <div class="list"><span class="category">Password:</span><input class="value" type="password" value="&#9679;&#9679;&#9679;&#9679;&#9679;" readonly></div>
+                    <input type="hidden" id="cancel" value="Cancel"> </input>
+                    <input type="hidden" id="save" value="Save"> </input>
+                    <input type="button" id="edit" value="Edit"> </input>
+                </form>
             </div>
         </budget-card>
+
+        <script>
+            document.querySelector('#edit').addEventListener('click', function() {
+                document.getElementById('edit').type = 'hidden';
+                document.getElementById('save').type = 'submit';
+                document.getElementById('cancel').type = 'button';
+
+                var inputs = document.querySelectorAll('input.value');
+                inputs.forEach(input => input.readOnly = false);
+                inputs[0].focus();
+            })
+
+            document.querySelector('#cancel').addEventListener('click', function() {
+                document.getElementById('edit').type = 'button';
+                document.getElementById('save').type = 'hidden';
+                document.getElementById('cancel').type = 'hidden';
+            })
+        </script>
     </div>
     <?php
     require './footer.php';

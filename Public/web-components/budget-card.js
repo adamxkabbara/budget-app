@@ -43,6 +43,16 @@ budget_card.innerHTML = `
         color: initial;
         display: block;
     }
+
+    .heading {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #edit {
+        color: var(--highlight-color);
+        font-size: medium;
+    }
 </style>
     <div class="card">
     <span class="header"></span>
@@ -86,7 +96,7 @@ customElements.define('budget-card',
                     this.shadowDOM.querySelector('.card').innerHTML = `<span class="header"></span><slot name="body"></slot>`;
                     break;
                 case 'header':
-                    this.shadowDOM.querySelector('.header').innerText = newValue;
+                    this.shadowDOM.querySelector('.header').innerHTML = newValue;
                     break;
             }
         }
