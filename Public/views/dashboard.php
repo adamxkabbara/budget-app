@@ -44,21 +44,6 @@ $chartData = $expense_controller->spending_breakdown($_SESSION['userId']);
                 </div>
             </budget-card>
 
-            <budget-card href='/transactions' header="Recent Transactions" type='View Transactions'>
-                <div slot="body">
-                    <?php
-                    if ($transactions) {
-                        foreach (array_splice($transactions, 0, 5) as $item) {
-                            $date = date("M d", strtotime($item->date));
-                            echo "<budget-item type=\"1\" date=\"{$date}\" category=\"{$item->category}\" value=\"{$item->amount}\">{$item->merchant}</budget-item>";
-                        }
-                    } else {
-                        echo "<p>No recent transactions</p>";
-                    }
-                    ?>
-                </div>
-            </budget-card>
-
             <budget-card href='/trends' header="Latest <?php echo date('F'); ?> Trends" type="View Trends">
                 <div class="chart" slot="body">
                     <?php
@@ -101,6 +86,21 @@ $chartData = $expense_controller->spending_breakdown($_SESSION['userId']);
                     options: options
                 });
             </script>
+
+            <budget-card href='/transactions' header="Recent Transactions" type='View Transactions'>
+                <div slot="body">
+                    <?php
+                    if ($transactions) {
+                        foreach (array_splice($transactions, 0, 5) as $item) {
+                            $date = date("M d", strtotime($item->date));
+                            echo "<budget-item type=\"1\" date=\"{$date}\" category=\"{$item->category}\" value=\"{$item->amount}\">{$item->merchant}</budget-item>";
+                        }
+                    } else {
+                        echo "<p>No recent transactions</p>";
+                    }
+                    ?>
+                </div>
+            </budget-card>
         </div>
     </div>
     <fab-button>
